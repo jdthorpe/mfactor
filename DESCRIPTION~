@@ -1,0 +1,33 @@
+Package: mfactor
+Title: Input normlization of delimited character fields
+Version: 0.1
+Authors@R: "Jason Thorpe <jdthorpe@gmail.com> [aut, cre]"
+Description: Input normlization of delimited character fields
+Depends:
+    R (>= 3.1.0)
+License: What license is it under?
+LazyData: true
+Collate:
+    'as.factor.R'
+    'mFactor-as.character.mfactor.R'
+    'mFactor-as.list.mfactor.R'
+    'mFactor-as.matrix.mfactor.R'
+    'mFactor-atomic.R'
+    'mFactor-factor.R'
+    'mFactor-generics.R'
+    'mFactor-levels.R'
+    'mFactor-list.mfactor.r'
+    'mFactor-matrix.mfactor.R'
+    'mFactor-median.R'
+    'mFactor-mfactor.character.R'
+    'mFactor-mfactor.factor.R'
+    'mFactor-none.R'
+    'mFactor-onload.R'
+    'mFactor-ops.R'
+    'mFactor-ordered.R'
+    'mFactor-rbind.R'
+    'mFactor-subset.R'
+    'mFactor.R'
+Suggests:
+    knitr
+VignetteBuilder: knitr

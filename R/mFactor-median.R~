@@ -1,0 +1,71 @@
+
+
+# redefine the base::factor as a generic.
+#' @export
+factor = function (...)
+    UseMethod('factor')
+# set the default to the base package
+factor.default = base::factor
+
+#' Coersion of multi-factors to oridnary factors
+#' 
+#' Coersion of multi-factors to oridnary factors.
+#' 
+#' Note that 'base::factor' is *not* an S3 generic, so `factor.mfactor()` must be
+#' called directly or `setGenerics()` must be be called prior to calling 
+#' `factor()`
+#' 
+#' @export
+#' @rdname mfactor-factor
+#' @family mfactor
+#' @param x a multi-factor to be coerced to a factor
+#' @inheritParams as.character.mfactor
+factor.mfactor <- function(x, 
+						   levels=attr(x,'levels'), 
+						   labels = levels, 
+						   exclude,
+						   ordered = inherits(x,'ord_mfactor'),
+						   ...){
+	if(!missing(exclude) && !(is.null(exclude)  | ((length(exclude) == 1) && is.na(exclude)))){
+		dflt <- getOption('mfactor.strict.compare',TRUE)
+		options(mfactor.strict.compare=FALSE)
+		x <- x - exclude
+		options(mfactor.strict.compare=dflt)
+	}
+	as.factor.mfactor(x,labels=labels,levels=levels,ordered=ordered,...)
+}
+
+#' Special median functions.
+#' 
+#' Special median functions, which return the upper(lower) of the two middle values
+#' when lenght(x) is even
+#' @param a numeric vector containing the values whose (special) median is to be computed
+#' @export lower.median
+#' @rdname special-median
+#' @examples
+#' x = c(1,2,3,3,3,4,5,6,7,8)
+#' 
+#' lower.median(x) # returns 3
+#' 
+#' upper.median(x) # returns 4
+#' 
+#' # 3 times more likely to return 3 than 4 b/c of the multiplicity of the value 3 in x
+#' median.random(x) 
+
+lower.median=function(x) x[ceiling(length(x)/2)]
+
+#' @export upper.median
+#' @rdname special-median
+upper.median=function(x) x[floor(length(x)/2)+1]
+
+#' @export upper.median
+#' @rdname special-median
+median.random=function(x) {
+	U <- upper.median(x)
+	L <- lower.median(x)
+	c(L,U)[sample.int(2,
+					  1,
+					  ,
+					  c(sum(x == L),sum(x == U)))]
+}
+

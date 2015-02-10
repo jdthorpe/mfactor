@@ -8,7 +8,7 @@
     * **Mac and Linux**:
 
         ```R
-        devtools::install_github("jdthorpe/devtools")
+        devtools::install_github("jdthorpe/mfactor")
         ```
 
     * **Windows**:

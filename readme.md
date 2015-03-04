@@ -8,18 +8,18 @@
 2. To install mfactor from github use: .
 
 
-        ```R
-        devtools::install_github("jdthorpe/mfactor")
-        ```
+    ```R
+    devtools::install_github("jdthorpe/mfactor")
+    ```
 
-        note that in windows, you may have to build the github tools using: 
+    note that in windows, you may have to build the github tools using: 
 
 
-        ```R
-        library(devtools)
-        build_github_devtools()
-        #### Restart R before continuing ####
-        ```
+    ```R
+    library(devtools)
+    build_github_devtools()
+    #### Restart R before continuing ####
+    ```
 
     * Alternatively, downoload the github repository to a zip file and use:
 

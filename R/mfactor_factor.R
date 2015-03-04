@@ -1,8 +1,3 @@
-# ------------------------------------------------------------
-# ------------------------------------------------------------
-# conversions to and from ordinary factors
-# ------------------------------------------------------------
-# ------------------------------------------------------------
 
 #' Coersion of factors to Multi-level Factors 
 #'
@@ -18,19 +13,17 @@
 #' @param ...  additional arguments depending on wether 'split' is specified
 #' @inheritParams mfactor
 mfactor.factor <- function(x,
-						   levels=base::levels(x),
-						   labels,
-						   ordered=is.ordered(x),
+						   levels,
+						   labels=levels,
 						   exclude=getOption('mfactor.none','<None>'),
+						   ordered=is.ordered(x),
 						   split,
-						   ...){
-	# ... are additional arguments to mfactor.character if 'split' specified
+						   ...){# additional arguments to mfactor.character if 'split' specified
+	# TODO: split the factor levels without calling mfactor.character
 	if('none' %in% names(list(...)))
 		stop("argument 'none' deprecated, use 'exclude' instead")
-	stopifnot(inherits(x,'factor'))
-
 	if(!missing(split)){
-		ARGS <- list(x=levels(x),...)
+		ARGS <- list(x=x,...)
 		ARGS[['ordered']] <- ordered
 		if(!missing(levels)) 
 			ARGS[['levels']] <- levels
@@ -38,25 +31,22 @@ mfactor.factor <- function(x,
 			ARGS[['labels']] <- labels
 		if(!missing(exclude)) 
 			ARGS[['exclude']] <- exclude
-		temp <-do.call(mfactor.character,ARGS)
-		out<-unclass(temp)[unclass(x),]
-		at <- attributes(temp)
-		at$dim[1] <- length(x)
-		attributes(out) <- at
-		return(out)
+		return(do.call(mfactor.character,ARGS))
 	}
 
 	# GIVE A WARNING FOR UNUSED ARGUMENTS
 	ARGS <- list(...)
 	if(length(ARGS))
 		stop(do.call(.unusedArgMessage,ARGS))
+	stopifnot(inherits(x,'factor'))
 
 	# HANDLE THE LABELS, IF PROVIDED
-	.levels <- base::levels(x)
 	.names <- names(x)
 	ux <- unclass(x)
 
-	# HANDLE THE EXCLUSIONS
+
+	# HANDLE THE EXCLUSIONS before handling the explicitly passed `levels`
+	.levels <- base::levels(x)
 	exclude <- intersect(.levels,exclude)
 	if(length(exclude)){
 		.newLevels <-setdiff(.levels,exclude)
@@ -64,32 +54,30 @@ mfactor.factor <- function(x,
 		mch[is.na(mch)] <- 0
 		ux <- mch[ux]
 		.levels <- .newLevels
+		if(missing(levels))
+			levels <- setdiff(base::levels(x),exclude)
 	}
 
-	# handle the labels
-	if(missing(labels)) 
-		labels <- .levels
+	# HANDLE EXPLICITLY PASSED LEVELS
+	if(!missing(levels)){
+		notMissing <- (is.na(ux)) | (ux > 0)
+		ux[notMissing] <- match(.levels,levels)[ux[notMissing]]
+	} else {
+		levels <- .levels
+	}
 
+	# MIMMIC THE HANDLING OF THE LABELS ARGUMENT IN `FACTOR()`
 	if(length(labels) == 1 & length(levels) >1) 
-		labels <- paste(labels,seq(length(.levels)),sep = '')
-	if(!length(labels) %in% c(1,length(.levels)))
-		stop("invalid 'labels'; length ",length(labels), " should be 1 or ",length(.levels))
+		labels <- paste(labels,seq(length(levels)),sep = '')
+	if(!length(labels) %in% c(1,length(levels)))
+		stop("invalid 'labels'; length ",length(labels), " should be 1 or ",length(levels))
 
 	stopifnot(all(ux >= 0,na.rm=T))
 	stopifnot(all(ux <= length(labels),na.rm=T))
-
-	# creat the underlying matrix
-	mx <- matrix(F,length(x),length(.levels))
-	mx[!is.na(ux) & ux==0,] <- F
-	mx[cbind(seq_along(ux),ux)] <- T
-
-	# give it a structure
-	out <- structure(mx, 
-					 levels = labels,
-					 class = c(if (ordered) "ord_mfactor", "mfactor"),
-					 names = .names)
-
+	y <- structure(ux, mlevels=character(0), levels= labels)
+	if(!is.null(.names)) 
+		names(y) <- .names
+	class(y) <- c(if (ordered) "ord_mfactor", "mfactor")
+	y
 }
-
-
 

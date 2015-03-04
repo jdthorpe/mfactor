@@ -1,3 +1,10 @@
+# ------------------------------------------------------------
+# the 'none' element
+# ------------------------------------------------------------
+
+#' @export
+NONE <- structure(0,class=c('mfactor'),levels=character(0),mlevels=character(0))
+
 
 # ----------------------------------------
 # DETECTION OF 'NONE' ELEMENTS
@@ -13,13 +20,10 @@ is.none.default <- function(x,...)
 
 #' @export
 is.none.ord_mfactor <- function(x)
-	apply(!unclass(x),1,all)
-	#(unclass(x) == 0)
-
+	(unclass(x) == 0)
 #' @export
 is.none.mfactor <- function(x)
-	apply(!unclass(x),1,all)
-	#(unclass(x) == 0)
+	(unclass(x) == 0)
 
 # ----------------------------------------
 # ASSIGNMENT OF 'NONE' ELEMENTS
@@ -30,22 +34,17 @@ is.none.mfactor <- function(x)
 	UseMethod("is.none<-")
 
 #' @export
-#' @method is.none<- default 
 `is.none<-.default` <- function(x,...)
 	stop(paste("`is.none<-`() is not defined for variables of class '",class(x)[1],"'",sep = ''))
 
 #' @export
 #' @method is.none<- mfactor 
 `is.none<-.mfactor` <- function (x, value) {
-	out<-uncalss(x)
-	out[,Value] <- F
-	attributes(out) <- attributes(x)
-    out
+	oc <- class(x)
+	x <- unclass(x)
+    x[value] <- 0
+	class(x) <- oc
+    x
 }
-
-NONE <- structure(matrix(F),class=c('mfactor'),levels=character(0))
-
-#' @export
-NONE 
 
 

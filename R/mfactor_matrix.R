@@ -1,6 +1,3 @@
-# ------------------------------------------------------------
-# conversions to and from indicator matricies
-# ------------------------------------------------------------
 
 #' Conversion between indicator matricies and mfactor variables
 #' 
@@ -25,19 +22,15 @@
 #' (y = mfactor(c('1,2,3','4,5',6,7,8),split = ',',levels = 1:10))
 #' as.matrix(y)
 #' 
-mfactor.matrix <- function(x,
-						   levels=colnames(x),
-						   ...){
-
+mfactor.matrix <- function(x,levels=dimnames(x)[[2]],...){
 	stopifnot(mode(x) == 'logical')
 	stopifnot(length(levels) == ncol(x))
-
-	out<-as.vector(out)
-	dim(out)<-dim(x)
-	class(out)<-'mfactor'
-	levels(out) <- levels
-	names(out) <- row.names(x)
-	out
+	m <- as.list(apply(x,1,which))
+	m <- lapply(m,function(x)levels[x])
+	m[apply(x,1,function(g)any(is.na(g)))] <- NA
+	m <- mfactor.list(m,levels=levels,...)
+	names(m) <- dimnames(x)[[1]]
+	m
 }
 
 

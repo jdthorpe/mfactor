@@ -1,17 +1,3 @@
-# ------------------------------------------------------------
-# ------------------------------------------------------------
-# conversions to and from ordinary factors
-# ------------------------------------------------------------
-# ------------------------------------------------------------
-
-
-
-# redefine the base::factor as a generic.
-#' @export
-factor = function (...)
-    UseMethod('factor')
-# set the default to the base package
-factor.default = base::factor
 
 #' Coersion of multi-factors to oridnary factors
 #' 
@@ -25,6 +11,7 @@ factor.default = base::factor
 #' @rdname mfactor-factor
 #' @family mfactor
 #' @param x a multi-factor to be coerced to a factor
+#' @include mFactor-character.R
 #' @inheritParams as.character.mfactor
 factor.mfactor <- function(x, 
 						   levels=attr(x,'levels'), 
@@ -32,12 +19,30 @@ factor.mfactor <- function(x,
 						   exclude,
 						   ordered = inherits(x,'ord_mfactor'),
 						   ...){
-	if(!missing(exclude) && !(is.null(exclude)  | ((length(exclude) == 1) && is.na(exclude)))){
+
+
+	# HANDLE THE EXCLUSIONS before handling the explicitly passed `levels`
+	if(!missing(exclude) && !(is.null(exclude)  || all(is.na(exclude)))){
 		dflt <- getOption('mfactor.strict.compare',TRUE)
+		on.exit(options(mfactor.strict.compare=dflt))
 		options(mfactor.strict.compare=FALSE)
-		x <- x - exclude
-		options(mfactor.strict.compare=dflt)
+		if(is.list(exclude))
+			x <- x - exclude
+		else
+			x <- x - list(exclude)
+		# don't mess with explicitly passed levels
+		if(missing(levels))
+			levels <- setdiff(levels,exclude)
 	}
-	as.factor.mfactor(x,labels=labels,levels=levels,ordered=ordered,...)
+
+
+	if(!missing(labels) || !missing(levels)|| !missing(exclude))
+		x <- mfactor(as.list(x),labels=labels,levels=levels)
+
+	if(!missing(ordered))
+		class(x) <- c(if (ordered) "ord_mfactor", "mfactor")
+
+	as.factor.mfactor(x,...)
+
 }
 

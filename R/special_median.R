@@ -22,7 +22,7 @@ lower.median=function(x) x[ceiling(length(x)/2)]
 #' @rdname special-median
 upper.median=function(x) x[floor(length(x)/2)+1]
 
-#' @export upper.median
+#' @export median.random
 #' @rdname special-median
 median.random=function(x) {
 	U <- upper.median(x)

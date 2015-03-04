@@ -1,6 +1,3 @@
-# ------------------------------------------------------------
-# conversions to and from character vectors
-# ------------------------------------------------------------
 
 #' Multi-level Factors
 #'
@@ -18,6 +15,7 @@
 #' @family mfactor
 #' @inheritParams base::strsplit
 #' @inheritParams mfactor
+#' @rdname mfactor-character
 #' @examples
 #' 
 #' (x = c("a,b,c","c","a,b"))
@@ -25,44 +23,21 @@
 #'  
 #' (y = mfactor(c('1,2,3','4,5',6,7,8),split = ',',levels = 1:10))
 #' as.character(y,sep = ',')
-#' 
-
 mfactor.character <- function(x=character(),
 							  split,
 							  fixed = FALSE,
 							  perl = FALSE,
 							  useBytes = FALSE,
 							  ...){# additoinal argumnts to mfactor.list -or- factor()
-	if(missing(split))
-		mfactor.factor(factor(x,...))
-	else{
+	if(!missing(split)){
 		x <- strsplit(x,split,fixed,perl,useBytes)
+		#x <- lapply(x,function(x) if(length(x)) x else NA)
 		ARGS <- list(x=x,...)
 		if('exclude' %in% names(ARGS)){
 		   	x <- lapply(x,function(x)x[!x %in% ARGS[['exclude']]])
 			ARGS <- ARGS[-which('exclude' %in% names(ARGS))]
 		}
 		do.call(mfactor.list,ARGS)
-	} 
+	} else
+		mfactor.factor(factor(x,...))
 }
-
-
-#-- mfactor.character <- function(x=character(),
-#-- 							  split,
-#-- 							  fixed = FALSE,
-#-- 							  perl = FALSE,
-#-- 							  useBytes = FALSE,
-#-- 							  ...){# additoinal argumnts to mfactor.list -or- factor()
-#-- 	if(!missing(split)){
-#-- 		x <- strsplit(x,split,fixed,perl,useBytes)
-#-- 		#x <- lapply(x,function(x) if(length(x)) x else NA)
-#-- 		ARGS <- list(x=x,...)
-#-- 		if('exclude' %in% names(ARGS)){
-#-- 		   	x <- lapply(x,function(x)x[!x %in% ARGS[['exclude']]])
-#-- 			ARGS <- ARGS[-which('exclude' %in% names(ARGS))]
-#-- 		}
-#-- 		do.call(mfactor.list,ARGS)
-#-- 	} else
-#-- 		mfactor.factor(factor(x,...))
-#-- }
-

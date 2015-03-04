@@ -3,7 +3,6 @@
 #'
 #' @export
 #' @method as.character mfactor 
-#' @rdname mfactor-character
 #' @family mfactor
 #' @param x a multi-factor to be coerced to a character vector
 #' @param sep A character string used to separate the distinct values that an entry may

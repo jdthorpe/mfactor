@@ -24,6 +24,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 
 
 ## ------------------------------------------------------------------------
+library(mfactor)
 mf <- mfactor(x =c(NA,"",'1','2','3','1,2','2,3','1,2,3')
 	,split=','
 	,levels = c('1','2','3','4')

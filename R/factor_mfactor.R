@@ -11,7 +11,6 @@
 #' @rdname mfactor-factor
 #' @family mfactor
 #' @param x a multi-factor to be coerced to a factor
-#' @include mFactor-character.R
 #' @inheritParams as.character.mfactor
 factor.mfactor <- function(x, 
 						   levels=attr(x,'levels'), 

@@ -78,6 +78,7 @@ character vector, except that the the argument `split` may be supplied
 it's individual elements, as follows:
 
 ```{r}
+library(mfactor)
 mf <- mfactor(x =c(NA,"",'1','2','3','1,2','2,3','1,2,3')
 	,split=','
 	,levels = c('1','2','3','4')

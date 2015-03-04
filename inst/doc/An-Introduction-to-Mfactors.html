@@ -10,7 +10,7 @@
 
 <meta name="author" content="Jason Thorpe [jdthorpe_at_gmail_dot_com]" />
 
-<meta name="date" content="2015-02-24" />
+<meta name="date" content="2015-03-04" />
 
 <title>An Introduction to multi-factors</title>
 
@@ -54,7 +54,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="header">
 <h1 class="title">An Introduction to multi-factors</h1>
 <h4 class="author"><em>Jason Thorpe [jdthorpe_at_gmail_dot_com]</em></h4>
-<h4 class="date"><em>2015-02-24</em></h4>
+<h4 class="date"><em>2015-03-04</em></h4>
 </div>
 
 
@@ -109,7 +109,14 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="creating-mfactor-variables" class="section level3">
 <h3>Creating <code>mfactor</code> variables</h3>
 <p>Creating <code>mfactor</code> variables is similar to creating ordinary factors from a character vector, except that the the argument <code>split</code> may be supplied (which is passed to <code>base::strsplit</code>) and is used to split each string into it’s individual elements, as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">mf &lt;-<span class="st"> </span><span class="kw">mfactor</span>(<span class="dt">x =</span><span class="kw">c</span>(<span class="ot">NA</span>,<span class="st">&quot;&quot;</span>,<span class="st">'1'</span>,<span class="st">'2'</span>,<span class="st">'3'</span>,<span class="st">'1,2'</span>,<span class="st">'2,3'</span>,<span class="st">'1,2,3'</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mfactor)
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'mfactor'</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; The following objects are masked from 'package:base':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     as.factor, as.ordered, factor, ordered</span>
+mf &lt;-<span class="st"> </span><span class="kw">mfactor</span>(<span class="dt">x =</span><span class="kw">c</span>(<span class="ot">NA</span>,<span class="st">&quot;&quot;</span>,<span class="st">'1'</span>,<span class="st">'2'</span>,<span class="st">'3'</span>,<span class="st">'1,2'</span>,<span class="st">'2,3'</span>,<span class="st">'1,2,3'</span>)
     ,<span class="dt">split=</span><span class="st">','</span>
     ,<span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">'1'</span>,<span class="st">'2'</span>,<span class="st">'3'</span>,<span class="st">'4'</span>)
     ,<span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">'Never'</span>,<span class="st">'Rarely'</span>,<span class="st">'Sometimes'</span>,<span class="st">'Often'</span>)
@@ -200,7 +207,7 @@ mf
 <span class="co"># the median value in the absence of ties, otherwise a random selection from </span>
 <span class="co"># the values closest to the arethmetic median.</span>
 <span class="kw">as.factor</span>(mf,median.random)
-<span class="co">#&gt; [1] &lt;NA&gt;      &lt;None&gt;    Never     Rarely    Sometimes Never     Rarely   </span>
+<span class="co">#&gt; [1] &lt;NA&gt;      &lt;None&gt;    Never     Rarely    Sometimes Rarely    Rarely   </span>
 <span class="co">#&gt; [8] Rarely   </span>
 <span class="co">#&gt; Levels: &lt;None&gt; &lt; Never &lt; Rarely &lt; Sometimes &lt; Often</span></code></pre>
 <p>User defined aggregating functions can also be used</p>
@@ -240,7 +247,7 @@ mf
 <span class="kw">options</span>(<span class="dt">mfactor.collapse=</span>median.random)
 <span class="kw">as.factor</span>(mf)
 <span class="co">#&gt; [1] &lt;NA&gt;        &lt;&lt;&lt;EMPTY&gt;&gt;&gt; Never       Rarely      Sometimes   Never      </span>
-<span class="co">#&gt; [7] Rarely      Rarely     </span>
+<span class="co">#&gt; [7] Sometimes   Rarely     </span>
 <span class="co">#&gt; Levels: &lt;&lt;&lt;EMPTY&gt;&gt;&gt; &lt; Never &lt; Rarely &lt; Sometimes &lt; Often</span></code></pre>
 <p>Note that arguments supplied to <code>as.factor()</code> will always override global options.</p>
 </div>

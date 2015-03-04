@@ -15,7 +15,6 @@
 #' @family mfactor
 #' @inheritParams base::strsplit
 #' @inheritParams mfactor
-#' @rdname mfactor-character
 #' @examples
 #' 
 #' (x = c("a,b,c","c","a,b"))

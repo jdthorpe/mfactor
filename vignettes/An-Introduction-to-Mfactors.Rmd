@@ -8,6 +8,9 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
+```{r, echo = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
 
 # Why mfactors?
 
@@ -18,7 +21,7 @@ value per entry.   If we we remove the words 'delimited' and '*should*' from
 the prevous sentance, we would have a good definition of a `factor`
 variable.  
 
-However, the process that generates such data is not constrained.
+However, the process that generates such data may not be constrained.
 Specifically the data that motivated this class were derives from paper
 surveys in which individuals were asked to pick 'the single best response'
 to dozens of questions, but often indicted more than one response.   If this
@@ -29,7 +32,8 @@ have been been constrained, but sadly, this was not the case.
 
 Before describing what multi-factors are and how they work, there are
 several obvious alternatives that may suffice in some cases, including (1) a
-ragged array, and (2) an indicator matrix or data.frame.  
+ragged array, (2) an indicator matrix, (3) a data.frame with indicator
+variables, or a character vector with delimited.  
 
 To begin with an example, lets say we ask 3 individuals, to answer the
 quesiton "How do you feel about the Seattle Seahawks?  (a) I don't like
@@ -37,94 +41,90 @@ them, (b) I love them, or (c) I've never heard of the Seattle Seahawks".
 furthermore lets assume that the first respondent replied 'a', the second
 respondent replied 'b', and the third respondent replid 'b' and 'c'.
 
-The following are three solutions to modeling these responses:
+The following are three solutions to modeling these responses, each of which
+may be preferred in some situations:
 
 
 ```{r}
-# A 'ragged array'
-ARRAY <- list('a','b',c('b','c'))
-ARRAY
+# A ragged array
+(response_list <- list('a','b',c('b','c')))
 
 # an indicator matirx
-MATRIX <- matrix(c(1,0,0,
-				   0,1,0,
-				   0,1,1),nrow=3,byrow=T,dimnames = list(1:3,letters[1:3]))
-MATRIX
+(response_matrix <- matrix(c(T,F,F,
+						     F,T,F,
+						     F,T,T),
+						     nrow=3,
+						     byrow=T,
+						     dimnames = list(1:3,
+											 c('a','b','c'))))
 
 # a data.frame with indicator variables. 
-DATA.FRAME <- data.frame(a = c(1,0,0),
-						 b = c(0,1,0),
-						 c = c(0,1,1))
-DATA.FRAME
+(response_df <- data.frame(a = c(T,F,F),
+						   b = c(F,T,F),
+						   c = c(F,T,T)))
+
+# A comma delimited set of strings
+(response_delim <- c('a','b','b,c'))
+
 ```
 
 ## About Multi-Factors (`mfactors`)
 
 ### Creating `mfactor` variables
 
-Creating `mfactor` variables is similar to createing factors, except that
-the the argument `split` may be supplied (which is passed to `base::strsplit`) 
-and is used to split each string into it's individual elements, as follows:
+Creating `mfactor` variables is similar to creating ordinary factors from a
+character vector, except that the the argument `split` may be supplied
+(which is passed to `base::strsplit`) and is used to split each string into
+it's individual elements, as follows:
 
 ```{r}
-mf <- mfactor:::mfactor.list(strsplit(c(NA,"",'1','2','3','1,2','2,3','1,2,3'),split=',')
-	,levels = c('1','2','3','4')
-	,labels = c('Never','Rarely','Sometimes','Often')
-	,ordered = TRUE)
-
+library(mfactor)
 mf <- mfactor(x =c(NA,"",'1','2','3','1,2','2,3','1,2,3')
 	,split=','
 	,levels = c('1','2','3','4')
 	,labels = c('Never','Rarely','Sometimes','Often')
 	,ordered = TRUE)
+mf
 ```
 
 Notice that several things happend in this call to mfactor. 
 
 - The elements of the argument `x` were separated using the regular
-  expression supplied to the argument 'split'
+  expression supplied to the argument `split`
 - The resulting elements were checked against the expected values supplied
-  in the 'levels' argument
-- The values were associted with labels supplied to the argument `labels`
+  in the `levels` argument, and the user would be warned if additonal values
+  were observed in `x` (after splitting `x` of course)
+- The values were re-labeled with labels supplied to the argument `labels`
 
 At each step many common errors (e.g. invalid values in the argumen `x`) are
 checked, and warnings or error issued in response, which can help with the
 data cleaning process.  
 
-
-### Subsets and Subset Assignment 
-
-Multi-factors behave in a similar way to ordinary factors in terms of
-subsets and subset assingnment
+Many other types of objects can also be  coerced to multi-factors via
+mfactors, as in:
 
 ```{r}
-mf[[2]] 
-mf[2:4]
-mf[3] <- 'Sometimes'
-mf
-```
-except that we can assign a list containing subsets of `levels(x)` when
-assiging values to a subset of a multi-factor.
-
-```{r}
-# subset assignment
-mf[[8]] <- list(c('Sometimes','Often')) # a new multi factor level
-mf
-# if a list is assigned, recycling happens at the list-element level
-mf[1:2] <- list(c('Never','Often'))
-mf
-# if a vector is assigned, recycling happens at the vector-element level
-mf[6:10] <- c('Sometimes','Often')
-mf
-# invalid factor level assignment creates missing values and issues a warning
-mf[9:10] <- c('hello','world')
+# A ragged array
+mfactor(response_delim,
+		split = ',',
+		levels=c('a','b','c'),
+		labels=c("Love'em","Hate'em","Who?"))
+mfactor(response_list,
+		levels=c('a','b','c'),
+		labels=c("Love'em","Hate'em","Who?"))
+# Note that by default the levels are taken from the column names
+# for data.frames and matricies (if they exist)
+mfactor(response_matrix,
+		labels=c("Love'em","Hate'em","Who?"))
+mfactor(response_df,
+		labels=c("Love'em","Hate'em","Who?"))
 ```
 
 ### Coersion to Ordinary Factors
 
 Typically the goal of data cleaning is to remove anamalies like the ones
 previously discucssed, so mfactrs are able to be converted to orinary
-factors using 'as.mfactor'. 
+factors using 'as.factor'. 
 
 ```{r}
 #conversion to factor types
@@ -147,33 +147,36 @@ as.factor(mf,min) # or equivelently: min(mf)
 as.factor(mf,max) # or equivelently: max(mf)
 # this median value provided (missing if even number of values provided)
 as.factor(mf,median) 
-'''
+```
 
 Did you notice that in the last example, supplying `median` as the
-aggregaing function resulted in a new level in `mf`.  This happed  because
-aggregaging functions *should* return a value in the set `1:length(levels(mf))`, but
-median returned a non integer value.  Because the 'median' of the selecte
-values is often considered desirable, the `mfactor` package includes 3
-aggregating functions which avoid this problem.
+aggregaing function introduced meissing values in `mf` and a warning stating
+`Warning in as.factor.mfactor(mf, median): NAs introduced by coersion from
+levels:"Never;Rarely", "Rarely;Sometimes"`?  This happed  because
+aggregaging functions *should* return an integer between zero and
+`length(levels(mf))` or a mising value), but in this case median returned a
+non integer value.  Because the `median` of the selected values is often
+desirable, the `mfactor` package includes 3 aggregating functions which
+avoid this problem.
 
 ```{r}
-# the median value in the absence of ties, the upper median if even number provided
+# the median value in the absence of ties, and the upper value otherwise
 as.factor(mf,upper.median)
 
-# the median value in the absence of ties, the upper median if even number provided
+# the median value in the absence of ties, and the lower median otherwise
 as.factor(mf,lower.median)
 
 # the median value in the absence of ties, otherwise a random selection from 
 # the values closest to the arethmetic median.
 as.factor(mf,median.random)
-'''
+```
 
 User defined aggregating functions can also be used
 
-'''{r}
+```{r}
 AGG <- function(x)floor(median(x)[1])
 as.factor(mf,AGG)
-'''
+```
 
 or alternatively, a string indicating the value to be assigned to each
 mutipliy-valued element can be specified
@@ -189,13 +192,13 @@ Default values for the arguments `collapse`, `sep`, and `none` in calls to
 
 ```{r}
 options(mfactor.sep="::")
-as.mfactor(mf)
-options(mfactor.none= "EMPTY")
-as.mfactor(mf)
-options(mfactor.collapse="<Multiple>")
-as.mfactor(mf)
+as.factor(mf)
+options(mfactor.none= "<<<EMPTY>>>")
+as.factor(mf)
+options(mfactor.collapse="<<<Various>>>")
+as.factor(mf)
 options(mfactor.collapse=median.random)
-as.mfactor(mf)
+as.factor(mf)
 ```
 
 Note that arguments supplied to `as.factor()` will always override global
@@ -209,13 +212,13 @@ options(mfactor.collapse=NULL)
 
 ## The 'NONE" type
 
-As mentioned earlier, each elemen multi-factor of an multi-factor can be
+As mentioned earlier, each element of an multi-factor can be
 thought of as the set of responses to a question indicating "Check all that
 apply'.  In the case that none of the options apply (and there is no option
 for 'None'), an element containing no values ("None of these apply to me")
 is distinct from a missing value ("User was not asked this question"). 
 
-There is a special `NONE` object which represents the latter concept("None 
+There is a special `NONE` object which represents the former concept("None 
 of these apply to me"), which can be used to test for elements in which no
 response is selected:
 
@@ -223,7 +226,7 @@ response is selected:
 mf == NONE
 ```
 
-`is.none` and `is.none<-` can also be used to query and assigne `NONE`
+`is.none` and `is.none<-` can also be used to query and assign `NONE`
 values:
 
 ```{r}
@@ -260,31 +263,6 @@ as.list(mf)
 (mf_matrix <- as.matrix(mf))
 ```
 
-And multi-factors can be created from these types:
-
-```{r}
-# Ragged Arrays:
-all(mf == mfactor(mf_ragged_array,
-				  ordered=T,
-				  levels=levels(mf)),
-	na.rm=T)
-
-# Character Vectors (we've already seen this...)
-all(mf == mfactor(mf_character,
-				  split="\\|",
-				  ordered=T),
-	na.rm=T)
-
-# Indicator Matricies.
-all(mf == mfactor(mf_matrix,
-				  ordered=T),
-	na.rm=T)
-```
-
-Note the need to escape the pipe character in the argment `split="\\|"`
-(instead of `split="|"`) because the pipe character has special meaning in regular expressoins.
-
-
 As a bit of syntactic sugar, a single column of the indicator matrix can be
 extracted using the `$` operator 
 
@@ -306,10 +284,11 @@ and `setdiff`:
 (p <- mfactor(letters[1:5],levels = letters[1:10])) #length = 5
 
 x + y
+
 # note that the usual recycling rules apply
 x + q 
 
-x + z # Warning: longer object length is not a multiple of shorter object length
+x + p # Warning: longer object length is not a multiple of shorter object length
 ```
 
 Type coercion is automatically applied by the  `+` and `-` operators:
@@ -317,14 +296,13 @@ Type coercion is automatically applied by the  `+` and `-` operators:
 ```{r}
 x - 'a'
 x + list('a','b') # notice the recycling rule is used because list('a','b') has length > 1
-z + list(c('a','b')) # now 'a' and 'b' are added to each element...
+x + list(c('a','b')) # now 'a' and 'b' are added to each element...
 ```
 
 ```{r,echo=FALSE}
 rm(x,y,p,q)
 ```
 
-```{r}
 
 ## Comparisons operators
 
@@ -362,6 +340,37 @@ mf > 'Sometimes'
 mf >= 'Sometimes'
 ```
 
+### Subsets and Subset Assignment 
+
+Multi-factors behave in a similar way to ordinary factors in terms of
+subsets and subset assingnment
+
+```{r}
+mf[[2]] 
+mf[2:4]
+mf[3] <- 'Sometimes'
+mf
+```
+except that we can assign a list containing subsets of `levels(x)` when
+assiging values to a subset of a multi-factor.
+
+```{r}
+# subset assignment
+mf[[8]] <- list(c('Sometimes','Often')) # a new multi factor level
+mf
+
+# if a list is assigned, recycling happens at the list-element level
+mf[1:2] <- list(c('Never','Often'))
+mf
+
+# if a vector is assigned, recycling happens at the vector-element level
+mf[6:10] <- c('Sometimes','Often')
+mf
+
+# invalid factor level assignment creates missing values and issues a warning
+mf[9:10] <- c('hello','world')
+```
+
 ## Miscelaneous
 
 Like other vectors, multi-factors can be extended or truncated using the
@@ -376,14 +385,14 @@ length(mf)
 length(mf) <- 5
 length(mf)
 
-: Length, Missing Values, None Values, Levels, an d
 # setting and identifying missing values
 is.na(mf)
 is.na(mf) <- 5
 is.na(mf)
 
 # element names
-names(mf) <- paste('x-',1:5,sep = '')
+names(mf) <- paste0('item',seq_along(mf))
+mf
 ```
 
 And like factors, the levels can be queried and reassigned via `levels` and
@@ -394,4 +403,6 @@ levels(mf)
 levels(mf) <- LETTERS[15:18]
 levels(mf)
 ```
+
+
 

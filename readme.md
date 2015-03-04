@@ -12,7 +12,7 @@
         devtools::install_github("jdthorpe/mfactor")
         ```
 
-    note that in windows, you may have to build the github toolws
+        note that in windows, you may have to build the github tools using: 
 
 
         ```R

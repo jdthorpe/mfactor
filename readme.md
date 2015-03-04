@@ -1,6 +1,4 @@
 
-(This project is currently being re-implemented with a more efficient back end, so some features are currently unavailable)
-
 ## Installation Instructions
 
 1. Install the release version of `devtools` from CRAN with `install.packages("devtools")`.

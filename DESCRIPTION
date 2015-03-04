@@ -5,7 +5,7 @@ Authors@R: "Jason Thorpe <jdthorpe@gmail.com> [aut, cre]"
 Description: Input normlization of delimited character fields
 Depends:
     R (>= 3.1.0),
-	methods
+    methods
 License: What license is it under?
 LazyData: true
 Collate:
@@ -46,5 +46,5 @@ Collate:
     'unusedArgs.R'
 Suggests:
     knitr,
-	thestthat
+    thestthat
 VignetteBuilder: knitr

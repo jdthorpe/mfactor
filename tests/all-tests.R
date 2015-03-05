@@ -1,4 +1,4 @@
-library(testthat)
-library(mfactor)
-
-test_package("mfactor")
+#-- library(testthat)
+#-- library(mfactor)
+#-- 
+#-- test_package("mfactor")

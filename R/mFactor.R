@@ -11,7 +11,7 @@
 #     like codes  which have to be parsed, and allow for the possibility 
 #     to have some levels of a value missing but not others, as in :
 #
-#			> mfactor(matrix(c(NA,T,F,T),nrow=2),levels=c('a','b'))
+#			> mfactor(matrix(c(NA,TRUE,FALSE,TRUE),nrow=2),levels=c('a','b'))
 #			[1] <NA:a>;b a;b 
 #			Levels: a b
 

@@ -16,15 +16,34 @@
 #' # 3 times more likely to return 3 than 4 b/c of the multiplicity of the value 3 in x
 #' median.random(x) 
 
-lower.median=function(x) x[ceiling(length(x)/2)]
+lower.median=function(x,na.rm=FALSE) {
+	if(na.rm){
+		x <- x[!is.na(x)]
+	}
+	if(!length(x) || any(is.na(x)))
+		return(NA)
+	x[ceiling(length(x)/2)]
+}
 
 #' @export upper.median
 #' @rdname special-median
-upper.median=function(x) x[floor(length(x)/2)+1]
+upper.median=function(x,na.rm=FALSE) { 
+	if(na.rm){
+		x <- x[!is.na(x)]
+	}
+	if(!length(x) || any(is.na(x)))
+		return(NA)
+	x[floor(length(x)/2)+1]
+}
 
 #' @export median.random
 #' @rdname special-median
-median.random=function(x) {
+median.random=function(x,na.rm=FALSE) {
+	if(na.rm){
+		x <- x[!is.na(x)]
+	}
+	if(!length(x) || any(is.na(x)))
+		return(NA)
 	U <- upper.median(x)
 	L <- lower.median(x)
 	c(L,U)[sample.int(2,

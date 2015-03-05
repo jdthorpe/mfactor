@@ -10,7 +10,7 @@
 
 <meta name="author" content="Jason Thorpe [jdthorpe_at_gmail_dot_com]" />
 
-<meta name="date" content="2015-03-04" />
+<meta name="date" content="2015-03-05" />
 
 <title>An Introduction to multi-factors</title>
 
@@ -43,7 +43,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </style>
 
 
-<link href="data:text/css,body%20%7B%0A%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20max%2Dwidth%3A%20700px%3B%0A%20%20overflow%3A%20visible%3B%0A%20%20padding%2Dleft%3A%202em%3B%0A%20%20padding%2Dright%3A%202em%3B%0A%20%20font%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014px%3B%0A%20%20line%2Dheight%3A%201%2E35%3B%0A%7D%0A%0A%23header%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0A%23TOC%20%7B%0A%20%20clear%3A%20both%3B%0A%20%20margin%3A%200%200%2010px%2010px%3B%0A%20%20padding%3A%204px%3B%0A%20%20width%3A%20400px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20border%2Dradius%3A%205px%3B%0A%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20font%2Dsize%3A%2013px%3B%0A%20%20line%2Dheight%3A%201%2E3%3B%0A%7D%0A%20%20%23TOC%20%2Etoctitle%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%20%20font%2Dsize%3A%2015px%3B%0A%20%20%20%20margin%2Dleft%3A%205px%3B%0A%20%20%7D%0A%0A%20%20%23TOC%20ul%20%7B%0A%20%20%20%20padding%2Dleft%3A%2040px%3B%0A%20%20%20%20margin%2Dleft%3A%20%2D1%2E5em%3B%0A%20%20%20%20margin%2Dtop%3A%205px%3B%0A%20%20%20%20margin%2Dbottom%3A%205px%3B%0A%20%20%7D%0A%20%20%23TOC%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dleft%3A%20%2D2em%3B%0A%20%20%7D%0A%20%20%23TOC%20li%20%7B%0A%20%20%20%20line%2Dheight%3A%2016px%3B%0A%20%20%7D%0A%0Atable%20%7B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dcolor%3A%20%23DDDDDD%3B%0A%20%20border%2Dstyle%3A%20outset%3B%0A%20%20border%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20padding%3A%205px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%20%20line%2Dheight%3A%2018px%3B%0A%20%20padding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0A%20%20border%2Dleft%2Dstyle%3A%20none%3B%0A%20%20border%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Ap%20%7B%0A%20%20margin%3A%200%2E5em%200%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20padding%3A%200%2E25em%200%2E75em%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%3A%20none%3B%0A%20%20border%2Dtop%3A%201px%20solid%20%23777%3B%0A%20%20margin%3A%2028px%200%3B%0A%7D%0A%0Adl%20%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%7D%0A%20%20dl%20dd%20%7B%0A%20%20%20%20margin%2Dbottom%3A%2013px%3B%0A%20%20%20%20margin%2Dleft%3A%2013px%3B%0A%20%20%7D%0A%20%20dl%20dt%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%7D%0A%0Aul%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%7D%0A%20%20ul%20li%20%7B%0A%20%20%20%20list%2Dstyle%3A%20circle%20outside%3B%0A%20%20%7D%0A%20%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dbottom%3A%200%3B%0A%20%20%7D%0A%0Apre%2C%20code%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20color%3A%20%23333%3B%0A%7D%0Apre%20%7B%0A%20%20white%2Dspace%3A%20pre%2Dwrap%3B%20%20%20%20%2F%2A%20Wrap%20long%20lines%20%2A%2F%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20margin%3A%205px%200px%2010px%200px%3B%0A%20%20padding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Acode%20%7B%0A%20%20font%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0A%20%20font%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0A%20%20padding%3A%202px%200px%3B%0A%7D%0A%0Adiv%2Efigure%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0A%20%20background%2Dcolor%3A%20%23FFFFFF%3B%0A%20%20padding%3A%202px%3B%0A%20%20border%3A%201px%20solid%20%23DDDDDD%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20margin%3A%200%205px%3B%0A%7D%0A%0Ah1%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20font%2Dsize%3A%2035px%3B%0A%20%20line%2Dheight%3A%2040px%3B%0A%7D%0A%0Ah2%20%7B%0A%20%20border%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20padding%2Dbottom%3A%202px%3B%0A%20%20font%2Dsize%3A%20145%25%3B%0A%7D%0A%0Ah3%20%7B%0A%20%20border%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20font%2Dsize%3A%20120%25%3B%0A%7D%0A%0Ah4%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0A%20%20margin%2Dleft%3A%208px%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Ah5%2C%20h6%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Aa%20%7B%0A%20%20color%3A%20%230033dd%3B%0A%20%20text%2Ddecoration%3A%20none%3B%0A%7D%0A%20%20a%3Ahover%20%7B%0A%20%20%20%20color%3A%20%236666ff%3B%20%7D%0A%20%20a%3Avisited%20%7B%0A%20%20%20%20color%3A%20%23800080%3B%20%7D%0A%20%20a%3Avisited%3Ahover%20%7B%0A%20%20%20%20color%3A%20%23BB00BB%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%0A%2F%2A%20Class%20described%20in%20https%3A%2F%2Fbenjeffrey%2Ecom%2Fposts%2Fpandoc%2Dsyntax%2Dhighlighting%2Dcss%0A%20%20%20Colours%20from%20https%3A%2F%2Fgist%2Egithub%2Ecom%2Frobsimmons%2F1172277%20%2A%2F%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Keyword%20%2A%2F%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%2F%2A%20DataType%20%2A%2F%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%2F%2A%20DecVal%20%28decimal%20values%29%20%2A%2F%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20BaseN%20%2A%2F%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Float%20%2A%2F%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Char%20%2A%2F%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20String%20%2A%2F%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%2F%2A%20Comment%20%2A%2F%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%2F%2A%20OtherToken%20%2A%2F%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20AlertToken%20%2A%2F%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Function%20calls%20%2A%2F%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%2F%2A%20ErrorTok%20%2A%2F%0A%0A" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="c:\Users\jthorpe\R\win-library\3.1\rmarkdown\rmarkdown\templates\html_vignette\resources\vignette.css" type="text/css" />
 
 </head>
 
@@ -54,7 +54,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="header">
 <h1 class="title">An Introduction to multi-factors</h1>
 <h4 class="author"><em>Jason Thorpe [jdthorpe_at_gmail_dot_com]</em></h4>
-<h4 class="date"><em>2015-03-04</em></h4>
+<h4 class="date"><em>2015-03-05</em></h4>
 </div>
 
 
@@ -68,7 +68,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>To begin with an example, lets say we ask 3 individuals, to answer the quesiton “How do you feel about the Seattle Seahawks? (a) I don’t like them, (b) I love them, or (c) I’ve never heard of the Seattle Seahawks”. furthermore lets assume that the first respondent replied ‘a’, the second respondent replied ‘b’, and the third respondent replid ‘b’ and ‘c’.</p>
 <p>The following are three solutions to modeling these responses, each of which may be preferred in some situations:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># A ragged array</span>
-(response_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">'a'</span>,<span class="st">'b'</span>,<span class="kw">c</span>(<span class="st">'b'</span>,<span class="st">'c'</span>)))
+(response_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="kw">c</span>(<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>)))
 <span class="co">#&gt; [[1]]</span>
 <span class="co">#&gt; [1] &quot;a&quot;</span>
 <span class="co">#&gt; </span>
@@ -85,7 +85,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
                              <span class="dt">nrow=</span><span class="dv">3</span>,
                              <span class="dt">byrow=</span>T,
                              <span class="dt">dimnames =</span> <span class="kw">list</span>(<span class="dv">1</span>:<span class="dv">3</span>,
-                                             <span class="kw">c</span>(<span class="st">'a'</span>,<span class="st">'b'</span>,<span class="st">'c'</span>))))
+                                             <span class="kw">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>))))
 <span class="co">#&gt;       a     b     c</span>
 <span class="co">#&gt; 1  TRUE FALSE FALSE</span>
 <span class="co">#&gt; 2 FALSE  TRUE FALSE</span>
@@ -101,7 +101,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <span class="co">#&gt; 3 FALSE FALSE  TRUE</span>
 
 <span class="co"># A comma delimited set of strings</span>
-(response_delim &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'a'</span>,<span class="st">'b'</span>,<span class="st">'b,c'</span>))
+(response_delim &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;b,c&#39;</span>))
 <span class="co">#&gt; [1] &quot;a&quot;   &quot;b&quot;   &quot;b,c&quot;</span></code></pre>
 </div>
 <div id="about-multi-factors-mfactors" class="section level2">
@@ -110,16 +110,10 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h3>Creating <code>mfactor</code> variables</h3>
 <p>Creating <code>mfactor</code> variables is similar to creating ordinary factors from a character vector, except that the the argument <code>split</code> may be supplied (which is passed to <code>base::strsplit</code>) and is used to split each string into it’s individual elements, as follows:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mfactor)
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'mfactor'</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; The following objects are masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     as.factor, as.ordered, factor, ordered</span>
-mf &lt;-<span class="st"> </span><span class="kw">mfactor</span>(<span class="dt">x =</span><span class="kw">c</span>(<span class="ot">NA</span>,<span class="st">&quot;&quot;</span>,<span class="st">'1'</span>,<span class="st">'2'</span>,<span class="st">'3'</span>,<span class="st">'1,2'</span>,<span class="st">'2,3'</span>,<span class="st">'1,2,3'</span>)
-    ,<span class="dt">split=</span><span class="st">','</span>
-    ,<span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">'1'</span>,<span class="st">'2'</span>,<span class="st">'3'</span>,<span class="st">'4'</span>)
-    ,<span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">'Never'</span>,<span class="st">'Rarely'</span>,<span class="st">'Sometimes'</span>,<span class="st">'Often'</span>)
+mf &lt;-<span class="st"> </span><span class="kw">mfactor</span>(<span class="dt">x =</span><span class="kw">c</span>(<span class="ot">NA</span>,<span class="st">&quot;&quot;</span>,<span class="st">&#39;1&#39;</span>,<span class="st">&#39;2&#39;</span>,<span class="st">&#39;3&#39;</span>,<span class="st">&#39;1,2&#39;</span>,<span class="st">&#39;2,3&#39;</span>,<span class="st">&#39;1,2,3&#39;</span>)
+    ,<span class="dt">split=</span><span class="st">&#39;,&#39;</span>
+    ,<span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&#39;1&#39;</span>,<span class="st">&#39;2&#39;</span>,<span class="st">&#39;3&#39;</span>,<span class="st">&#39;4&#39;</span>)
+    ,<span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&#39;Never&#39;</span>,<span class="st">&#39;Rarely&#39;</span>,<span class="st">&#39;Sometimes&#39;</span>,<span class="st">&#39;Often&#39;</span>)
     ,<span class="dt">ordered =</span> <span class="ot">TRUE</span>)
 mf
 <span class="co">#&gt; [1] &lt;NA&gt;                   &lt;None&gt;                 Never                 </span>
@@ -136,27 +130,27 @@ mf
 <p>Many other types of objects can also be coerced to multi-factors via mfactors, as in:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># A ragged array</span>
 <span class="kw">mfactor</span>(response_delim,
-        <span class="dt">split =</span> <span class="st">','</span>,
-        <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">'a'</span>,<span class="st">'b'</span>,<span class="st">'c'</span>),
-        <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Love'em&quot;</span>,<span class="st">&quot;Hate'em&quot;</span>,<span class="st">&quot;Who?&quot;</span>))
-<span class="co">#&gt; [1] Love'em      Hate'em      Hate'em;Who?</span>
-<span class="co">#&gt; Levels: Love'em Hate'em Who?</span>
+        <span class="dt">split =</span> <span class="st">&#39;,&#39;</span>,
+        <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>),
+        <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Love&#39;em&quot;</span>,<span class="st">&quot;Hate&#39;em&quot;</span>,<span class="st">&quot;Who?&quot;</span>))
+<span class="co">#&gt; [1] Love&#39;em      Hate&#39;em      Hate&#39;em;Who?</span>
+<span class="co">#&gt; Levels: Love&#39;em Hate&#39;em Who?</span>
 <span class="kw">mfactor</span>(response_list,
-        <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">'a'</span>,<span class="st">'b'</span>,<span class="st">'c'</span>),
-        <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Love'em&quot;</span>,<span class="st">&quot;Hate'em&quot;</span>,<span class="st">&quot;Who?&quot;</span>))
-<span class="co">#&gt; [1] Love'em      Hate'em      Hate'em;Who?</span>
-<span class="co">#&gt; Levels: Love'em Hate'em Who?</span>
+        <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>),
+        <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Love&#39;em&quot;</span>,<span class="st">&quot;Hate&#39;em&quot;</span>,<span class="st">&quot;Who?&quot;</span>))
+<span class="co">#&gt; [1] Love&#39;em      Hate&#39;em      Hate&#39;em;Who?</span>
+<span class="co">#&gt; Levels: Love&#39;em Hate&#39;em Who?</span>
 <span class="co"># Note that by default the levels are taken from the column names</span>
 <span class="co"># for data.frames and matricies (if they exist)</span>
 <span class="kw">mfactor</span>(response_matrix,
-        <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Love'em&quot;</span>,<span class="st">&quot;Hate'em&quot;</span>,<span class="st">&quot;Who?&quot;</span>))
+        <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Love&#39;em&quot;</span>,<span class="st">&quot;Hate&#39;em&quot;</span>,<span class="st">&quot;Who?&quot;</span>))
 <span class="co">#&gt;            1            2            3 </span>
-<span class="co">#&gt;      Love'em      Hate'em Hate'em;Who? </span>
-<span class="co">#&gt; Levels: Love'em Hate'em Who?</span>
+<span class="co">#&gt;      Love&#39;em      Hate&#39;em Hate&#39;em;Who? </span>
+<span class="co">#&gt; Levels: Love&#39;em Hate&#39;em Who?</span>
 <span class="kw">mfactor</span>(response_df,
-        <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Love'em&quot;</span>,<span class="st">&quot;Hate'em&quot;</span>,<span class="st">&quot;Who?&quot;</span>))
-<span class="co">#&gt; [1] Love'em      Hate'em;Who? Who?        </span>
-<span class="co">#&gt; Levels: Love'em Hate'em Who?</span></code></pre>
+        <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Love&#39;em&quot;</span>,<span class="st">&quot;Hate&#39;em&quot;</span>,<span class="st">&quot;Who?&quot;</span>))
+<span class="co">#&gt; [1] Love&#39;em      Hate&#39;em;Who? Who?        </span>
+<span class="co">#&gt; Levels: Love&#39;em Hate&#39;em Who?</span></code></pre>
 </div>
 <div id="coersion-to-ordinary-factors" class="section level3">
 <h3>Coersion to Ordinary Factors</h3>
@@ -167,19 +161,19 @@ mf
 <span class="co">#&gt; [4] Rarely                 Sometimes              Never;Rarely          </span>
 <span class="co">#&gt; [7] Rarely;Sometimes       Never;Rarely;Sometimes</span>
 <span class="co">#&gt; 8 Levels: &lt;None&gt; &lt; Never &lt; Rarely &lt; Sometimes &lt; ... &lt; Never;Rarely;Sometimes</span>
-<span class="kw">as.factor</span>(mf,<span class="dt">sep =</span> <span class="st">'|'</span>)
+<span class="kw">as.factor</span>(mf,<span class="dt">sep =</span> <span class="st">&#39;|&#39;</span>)
 <span class="co">#&gt; [1] &lt;NA&gt;                   &lt;None&gt;                 Never                 </span>
 <span class="co">#&gt; [4] Rarely                 Sometimes              Never|Rarely          </span>
 <span class="co">#&gt; [7] Rarely|Sometimes       Never|Rarely|Sometimes</span>
 <span class="co">#&gt; 8 Levels: &lt;None&gt; &lt; Never &lt; Rarely &lt; Sometimes &lt; ... &lt; Never|Rarely|Sometimes</span></code></pre>
 <p>The above conversions were not very useful, since, except for the fact that the codes were exchanged for labels, the data are in the same shape they were at the beining of this exercise.</p>
 <p>The real power of multi-factors comes from the fact that we can supply an <em>aggregating function</em>, which returns a single value when supplied a vector input. Examples of aggregating functions include <code>min</code>,<code>max</code>, and <code>median</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The 'smallest' value from each element:</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The &#39;smallest&#39; value from each element:</span>
 <span class="kw">as.factor</span>(mf,min) <span class="co"># or equivelently: min(mf)</span>
 <span class="co">#&gt; [1] &lt;NA&gt;      &lt;None&gt;    Never     Rarely    Sometimes Never     Rarely   </span>
 <span class="co">#&gt; [8] Never    </span>
 <span class="co">#&gt; Levels: &lt;None&gt; &lt; Never &lt; Rarely &lt; Sometimes &lt; Often</span>
-<span class="co"># The 'largest' value from each element:</span>
+<span class="co"># The &#39;largest&#39; value from each element:</span>
 <span class="kw">as.factor</span>(mf,max) <span class="co"># or equivelently: max(mf)</span>
 <span class="co">#&gt; [1] &lt;NA&gt;      &lt;None&gt;    Never     Rarely    Sometimes Rarely    Sometimes</span>
 <span class="co">#&gt; [8] Sometimes</span>
@@ -207,7 +201,7 @@ mf
 <span class="co"># the median value in the absence of ties, otherwise a random selection from </span>
 <span class="co"># the values closest to the arethmetic median.</span>
 <span class="kw">as.factor</span>(mf,median.random)
-<span class="co">#&gt; [1] &lt;NA&gt;      &lt;None&gt;    Never     Rarely    Sometimes Rarely    Rarely   </span>
+<span class="co">#&gt; [1] &lt;NA&gt;      &lt;None&gt;    Never     Rarely    Sometimes Never     Sometimes</span>
 <span class="co">#&gt; [8] Rarely   </span>
 <span class="co">#&gt; Levels: &lt;None&gt; &lt; Never &lt; Rarely &lt; Sometimes &lt; Often</span></code></pre>
 <p>User defined aggregating functions can also be used</p>
@@ -217,7 +211,7 @@ mf
 <span class="co">#&gt; [8] Rarely   </span>
 <span class="co">#&gt; Levels: &lt;None&gt; &lt; Never &lt; Rarely &lt; Sometimes &lt; Often</span></code></pre>
 <p>or alternatively, a string indicating the value to be assigned to each mutipliy-valued element can be specified</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.factor</span>(mf,<span class="dt">collapse=</span><span class="st">'&lt;Multiple-Values&gt;'</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.factor</span>(mf,<span class="dt">collapse=</span><span class="st">&#39;&lt;Multiple-Values&gt;&#39;</span>)
 <span class="co">#&gt; [1] &lt;NA&gt;              &lt;None&gt;            Never             Rarely           </span>
 <span class="co">#&gt; [5] Sometimes         &lt;Multiple-Values&gt; &lt;Multiple-Values&gt; &lt;Multiple-Values&gt;</span>
 <span class="co">#&gt; 6 Levels: &lt;None&gt; &lt; Never &lt; Rarely &lt; Sometimes &lt; ... &lt; &lt;Multiple-Values&gt;</span></code></pre>
@@ -247,7 +241,7 @@ mf
 <span class="kw">options</span>(<span class="dt">mfactor.collapse=</span>median.random)
 <span class="kw">as.factor</span>(mf)
 <span class="co">#&gt; [1] &lt;NA&gt;        &lt;&lt;&lt;EMPTY&gt;&gt;&gt; Never       Rarely      Sometimes   Never      </span>
-<span class="co">#&gt; [7] Sometimes   Rarely     </span>
+<span class="co">#&gt; [7] Rarely      Rarely     </span>
 <span class="co">#&gt; Levels: &lt;&lt;&lt;EMPTY&gt;&gt;&gt; &lt; Never &lt; Rarely &lt; Sometimes &lt; Often</span></code></pre>
 <p>Note that arguments supplied to <code>as.factor()</code> will always override global options.</p>
 </div>
@@ -270,7 +264,7 @@ x
 <span class="co">#&gt; [7] Rarely;Sometimes       Never;Rarely;Sometimes</span>
 <span class="co">#&gt; Levels: Never &lt; Rarely &lt; Sometimes &lt; Often</span></code></pre>
 <p>and the string used to indicate ‘NONE’ values can be set globally</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="st">'mfactor.none'</span>=<span class="st">'&lt;Hello World&gt;'</span>) 
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="st">&#39;mfactor.none&#39;</span>=<span class="st">&#39;&lt;Hello World&gt;&#39;</span>) 
 x
 <span class="co">#&gt; [1] &lt;Hello World&gt;          &lt;Hello World&gt;          &lt;Hello World&gt;         </span>
 <span class="co">#&gt; [4] &lt;Hello World&gt;          &lt;Hello World&gt;          Never;Rarely          </span>
@@ -331,7 +325,7 @@ x
 <span class="co">#&gt; [1] &quot;Never&quot;     &quot;Rarely&quot;    &quot;Sometimes&quot;</span>
 
 <span class="co"># Character Vectors</span>
-(mf_character &lt;-<span class="st"> </span><span class="kw">as.character</span>(mf,<span class="dt">sep=</span><span class="st">'|'</span>))
+(mf_character &lt;-<span class="st"> </span><span class="kw">as.character</span>(mf,<span class="dt">sep=</span><span class="st">&#39;|&#39;</span>))
 <span class="co">#&gt; [1] NA                       &quot;&lt;None&gt;&quot;                </span>
 <span class="co">#&gt; [3] &quot;Never&quot;                  &quot;Rarely&quot;                </span>
 <span class="co">#&gt; [5] &quot;Sometimes&quot;              &quot;Never|Rarely&quot;          </span>
@@ -384,13 +378,13 @@ x +<span class="st"> </span>p <span class="co"># Warning: longer object length i
 <span class="co">#&gt; [1] a   b   c   d   e   a;f</span>
 <span class="co">#&gt; Levels: a b c d e f g h i j</span></code></pre>
 <p>Type coercion is automatically applied by the <code>+</code> and <code>-</code> operators:</p>
-<pre class="sourceCode r"><code class="sourceCode r">x -<span class="st"> 'a'</span>
+<pre class="sourceCode r"><code class="sourceCode r">x -<span class="st"> &#39;a&#39;</span>
 <span class="co">#&gt; [1] &lt;None&gt; b      c      d      e      f     </span>
 <span class="co">#&gt; Levels: a b c d e f g h i j</span>
-x +<span class="st"> </span><span class="kw">list</span>(<span class="st">'a'</span>,<span class="st">'b'</span>) <span class="co"># notice the recycling rule is used because list('a','b') has length &gt; 1</span>
+x +<span class="st"> </span><span class="kw">list</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>) <span class="co"># notice the recycling rule is used because list(&#39;a&#39;,&#39;b&#39;) has length &gt; 1</span>
 <span class="co">#&gt; [1] a   b   a;c b;d a;e b;f</span>
 <span class="co">#&gt; Levels: a b c d e f g h i j</span>
-x +<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">'a'</span>,<span class="st">'b'</span>)) <span class="co"># now 'a' and 'b' are added to each element...</span>
+x +<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>)) <span class="co"># now &#39;a&#39; and &#39;b&#39; are added to each element...</span>
 <span class="co">#&gt; [1] a;b   a;b   a;b;c a;b;d a;b;e a;b;f</span>
 <span class="co">#&gt; Levels: a b c d e f g h i j</span></code></pre>
 </div>
@@ -421,13 +415,13 @@ mf ==<span class="st"> </span>mf2 <span class="co"># essentially a vectorized ve
 mf !=<span class="st"> </span>mf2 <span class="co"># essentially a vectorized version of`!any(a %in%  b)`</span>
 <span class="co">#&gt; [1]    NA  TRUE FALSE FALSE FALSE FALSE FALSE FALSE</span></code></pre>
 <p>Lastly, there is implied type coercion for the comparison operators</p>
-<pre class="sourceCode r"><code class="sourceCode r">mf &lt;<span class="st"> 'Sometimes'</span>
+<pre class="sourceCode r"><code class="sourceCode r">mf &lt;<span class="st"> &#39;Sometimes&#39;</span>
 <span class="co">#&gt; [1]    NA    NA  TRUE FALSE FALSE FALSE FALSE FALSE</span>
-mf &lt;=<span class="st"> 'Sometimes'</span>
+mf &lt;=<span class="st"> &#39;Sometimes&#39;</span>
 <span class="co">#&gt; [1]    NA    NA  TRUE  TRUE FALSE  TRUE FALSE FALSE</span>
-mf &gt;<span class="st"> 'Sometimes'</span>
+mf &gt;<span class="st"> &#39;Sometimes&#39;</span>
 <span class="co">#&gt; [1]    NA    NA FALSE FALSE  TRUE FALSE FALSE FALSE</span>
-mf &gt;=<span class="st"> 'Sometimes'</span>
+mf &gt;=<span class="st"> &#39;Sometimes&#39;</span>
 <span class="co">#&gt; [1]    NA    NA FALSE  TRUE  TRUE FALSE  TRUE FALSE</span></code></pre>
 <div id="subsets-and-subset-assignment" class="section level3">
 <h3>Subsets and Subset Assignment</h3>
@@ -438,7 +432,7 @@ mf &gt;=<span class="st"> 'Sometimes'</span>
 mf[<span class="dv">2</span>:<span class="dv">4</span>]
 <span class="co">#&gt; [1] &lt;None&gt; Never  Rarely</span>
 <span class="co">#&gt; Levels: Never &lt; Rarely &lt; Sometimes &lt; Often</span>
-mf[<span class="dv">3</span>] &lt;-<span class="st"> 'Sometimes'</span>
+mf[<span class="dv">3</span>] &lt;-<span class="st"> &#39;Sometimes&#39;</span>
 mf
 <span class="co">#&gt; [1] &lt;NA&gt;                   &lt;None&gt;                 Sometimes             </span>
 <span class="co">#&gt; [4] Rarely                 Sometimes              Never;Rarely          </span>
@@ -446,21 +440,21 @@ mf
 <span class="co">#&gt; Levels: Never &lt; Rarely &lt; Sometimes &lt; Often</span></code></pre>
 <p>except that we can assign a list containing subsets of <code>levels(x)</code> when assiging values to a subset of a multi-factor.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># subset assignment</span>
-mf[[<span class="dv">8</span>]] &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">'Sometimes'</span>,<span class="st">'Often'</span>)) <span class="co"># a new multi factor level</span>
+mf[[<span class="dv">8</span>]] &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&#39;Sometimes&#39;</span>,<span class="st">&#39;Often&#39;</span>)) <span class="co"># a new multi factor level</span>
 mf
 <span class="co">#&gt; [1] &lt;NA&gt;             &lt;None&gt;           Sometimes        Rarely          </span>
 <span class="co">#&gt; [5] Sometimes        Never;Rarely     Rarely;Sometimes Sometimes;Often </span>
 <span class="co">#&gt; Levels: Never &lt; Rarely &lt; Sometimes &lt; Often</span>
 
 <span class="co"># if a list is assigned, recycling happens at the list-element level</span>
-mf[<span class="dv">1</span>:<span class="dv">2</span>] &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">'Never'</span>,<span class="st">'Often'</span>))
+mf[<span class="dv">1</span>:<span class="dv">2</span>] &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&#39;Never&#39;</span>,<span class="st">&#39;Often&#39;</span>))
 mf
 <span class="co">#&gt; [1] Never;Often      Never;Often      Sometimes        Rarely          </span>
 <span class="co">#&gt; [5] Sometimes        Never;Rarely     Rarely;Sometimes Sometimes;Often </span>
 <span class="co">#&gt; Levels: Never &lt; Rarely &lt; Sometimes &lt; Often</span>
 
 <span class="co"># if a vector is assigned, recycling happens at the vector-element level</span>
-mf[<span class="dv">6</span>:<span class="dv">10</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'Sometimes'</span>,<span class="st">'Often'</span>)
+mf[<span class="dv">6</span>:<span class="dv">10</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Sometimes&#39;</span>,<span class="st">&#39;Often&#39;</span>)
 <span class="co">#&gt; Warning in x[...] &lt;- m: number of items to replace is not a multiple of</span>
 <span class="co">#&gt; replacement length</span>
 mf
@@ -469,7 +463,7 @@ mf
 <span class="co">#&gt; Levels: Never &lt; Rarely &lt; Sometimes &lt; Often</span>
 
 <span class="co"># invalid factor level assignment creates missing values and issues a warning</span>
-mf[<span class="dv">9</span>:<span class="dv">10</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'hello'</span>,<span class="st">'world'</span>)
+mf[<span class="dv">9</span>:<span class="dv">10</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;hello&#39;</span>,<span class="st">&#39;world&#39;</span>)
 <span class="co">#&gt; Warning in `[&lt;-.mfactor`(`*tmp*`, 9:10, value = c(&quot;hello&quot;, &quot;world&quot;)):</span>
 <span class="co">#&gt; invalid factor level, NAs generated</span></code></pre>
 </div>
@@ -495,7 +489,7 @@ mf[<span class="dv">9</span>:<span class="dv">10</span>] &lt;-<span class="st"> 
 <span class="co">#&gt; [1] FALSE FALSE FALSE FALSE  TRUE</span>
 
 <span class="co"># element names</span>
-<span class="kw">names</span>(mf) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">'item'</span>,<span class="kw">seq_along</span>(mf))
+<span class="kw">names</span>(mf) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;item&#39;</span>,<span class="kw">seq_along</span>(mf))
 mf
 <span class="co">#&gt;       item1       item2       item3       item4       item5 </span>
 <span class="co">#&gt; Never;Often Never;Often   Sometimes      Rarely        &lt;NA&gt; </span>

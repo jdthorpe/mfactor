@@ -16,6 +16,7 @@
 #'    c(TRUE ,TRUE ,TRUE ,FALSE,
 #'      FALSE,FALSE,TRUE ,FALSE,
 #'      TRUE ,TRUE ,FALSE,FALSE),
+#'    nrow=3,
 #'    dimnames = list(1:3,letters[1:4])))
 #' mfactor(x)
 #'  

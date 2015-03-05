@@ -2,7 +2,10 @@
 #' @export
 #' @family mfactor
 #' @rdname mfactor-list
-as.list.mfactor <- function(x,levels=FALSE) {
+as.list.mfactor <- function(x,levels=FALSE, ...) {
+	ARGS <- list(...)
+	if(length(ARGS))
+		stop(do.call(.unusedArgMessage,ARGS))
 	# convert to a list with the factor levels where length(out) == length(x)
 	lx <- attr(x,'levels')
 	mlx <- attr(x,'mlevels')

@@ -19,7 +19,7 @@
 mfactor.list <- function(x,
 						 labels=levels,
 						 levels,
-						 ordered=F,
+						 ordered=FALSE,
 						 exclude,...){ # additional arguments to mfactor.factor
 	modes <- function(x) {
 		if(is.null(x))

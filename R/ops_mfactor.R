@@ -6,8 +6,9 @@ median.mfactor <- function (x, ...)
     stop(.Generic, " not meaningful for mfactors")
 
 #' @export
-Complex.mfactor <- function (x, ...) 
+Complex.mfactor <- function (z) 
     stop(.Generic, " not meaningful for mfactors")
+
 #' @export
 Math.mfactor <- function (x, ...) 
     stop(.Generic, " not meaningful for mfactors")

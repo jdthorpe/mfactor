@@ -72,8 +72,8 @@ mfactor.factor <- function(x,
 	if(!length(labels) %in% c(1,length(levels)))
 		stop("invalid 'labels'; length ",length(labels), " should be 1 or ",length(levels))
 
-	stopifnot(all(ux >= 0,na.rm=T))
-	stopifnot(all(ux <= length(labels),na.rm=T))
+	stopifnot(all(ux >= 0,na.rm=TRUE))
+	stopifnot(all(ux <= length(labels),na.rm=TRUE))
 	y <- structure(ux, mlevels=character(0), levels= labels)
 	if(!is.null(.names)) 
 		names(y) <- .names

@@ -2,7 +2,9 @@
 title: "An Introduction to multi-factors"
 author: "Jason Thorpe [jdthorpe_at_gmail_dot_com]"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    self_contained: no
 vignette: >
   %\VignetteIndexEntry{An Introduction to multi-factors}
   %\VignetteEngine{knitr::rmarkdown}

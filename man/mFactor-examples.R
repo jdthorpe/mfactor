@@ -51,7 +51,7 @@ as.factor(mf[1],upper.median)
 as.list(mf)
 as.list(mf,levels=TRUE)
 
-identical(mf,mfactor(as.list(mf),ordered=T,levels=levels(mf)))
+identical(mf,mfactor(as.list(mf),ordered=TRUE,levels=levels(mf)))
 as.character(mf,sep='|')
 as.matrix(mf)
 

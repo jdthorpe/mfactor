@@ -5,7 +5,7 @@
 \title{Coersion of multi-factors to character vectors}
 \usage{
 \method{as.character}{mfactor}(x, sep = ";",
-  none = getOption("mfactor.none", "<None>"))
+  none = getOption("mfactor.none", "<None>"), ...)
 }
 \arguments{
 \item{x}{a multi-factor to be coerced to a character vector}

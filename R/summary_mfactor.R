@@ -1,10 +1,10 @@
 
 #' @export
 #' @method summary mfactor
-`summary.mfactor` <- function(x){
-	mx <- as.matrix(x)
-	rbind('TRUE' = apply(mx,2,sum,na.rm=T),
-		  'FALSE'= apply(!mx,2,sum,na.rm=T),
+`summary.mfactor` <- function(object,...){
+	mx <- as.matrix(object)
+	rbind('TRUE' = apply(mx,2,sum,na.rm=TRUE),
+		  'FALSE'= apply(!mx,2,sum,na.rm=TRUE),
 		  '<NA>' = apply(is.na(mx),2,sum))
 }
 

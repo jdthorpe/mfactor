@@ -2,7 +2,7 @@
 #' @export
 #' @rdname mfactor-matrix
 #' @family mfactor
-as.matrix.mfactor <- function(x){
+as.matrix.mfactor <- function(x,...){
 	# convert to a matrix of indicator variables
 	ux <- unclass(x)
 	lx <- levels(x)

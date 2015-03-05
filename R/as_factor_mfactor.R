@@ -5,6 +5,18 @@
 #' @family mfactor
 #' @inheritParams factor.mfactor
 #' @inheritParams as.character.mfactor
+#' 
+#' @param collapse Either (A) an *aggregating function*, which returns a
+#' single value when supplied a integer vector input (such as `min`,`max`, and
+#' `median`, etc).  in order to represent the mutiply valued elment in the the
+#' resulting vactor, or (B) a string which should replace multiply valued
+#' elements in the resulting factor, or (C) `NA`.  Note that only one of the
+#' arguments `sep` and `collapse` should be specified.
+#' 
+#' @param sep a string to be used as a delemiter in order to collapse
+#' muitiply valued elemnents to a string representation of those values. Note
+#' that only one of the arguments `sep` and `collapse` should be specified. 
+#' 
 as.factor.mfactor <- function(x,
 							  collapse, # argument for as.character.mfactor
 							  sep=getOption('mfactor.sep',';'),# argument for as.character.mfactor

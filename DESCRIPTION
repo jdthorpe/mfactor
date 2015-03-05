@@ -45,6 +45,5 @@ Collate:
     'unique_mfactor.R'
     'unusedArgs.R'
 Suggests:
-    knitr,
-    thestthat
+    knitr
 VignetteBuilder: knitr

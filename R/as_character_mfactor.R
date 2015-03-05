@@ -13,8 +13,8 @@
 #' the knowlege that none of levels were indicated.
 as.character.mfactor <- function (x,
 								  sep=';',
-								  none= getOption('mfactor.none','<None>') 
-								  ){
+								  none= getOption('mfactor.none','<None>') ,
+								  ...){
 	lx <-  c(attr(x,'levels'),
 			 unlist(lapply(lapply(strsplit(attr(x,'mlevels'),','),
 								  function(lvl)

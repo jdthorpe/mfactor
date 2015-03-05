@@ -5,7 +5,7 @@
 \alias{mfactor.matrix}
 \title{Conversion between indicator matricies and mfactor variables}
 \usage{
-\method{as.matrix}{mfactor}(x)
+\method{as.matrix}{mfactor}(x, ...)
 
 \method{mfactor}{matrix}(x, levels = dimnames(x)[[2]], ...)
 }
@@ -23,6 +23,7 @@ Conversion between indicator matricies and mfactor variables.
    c(TRUE ,TRUE ,TRUE ,FALSE,
      FALSE,FALSE,TRUE ,FALSE,
      TRUE ,TRUE ,FALSE,FALSE),
+   nrow=3,
    dimnames = list(1:3,letters[1:4])))
 mfactor(x)
 

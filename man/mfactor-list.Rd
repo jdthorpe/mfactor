@@ -5,13 +5,15 @@
 \alias{mfactor.list}
 \title{Conversion between lists of values and mfactor variables}
 \usage{
-\method{as.list}{mfactor}(x, levels = FALSE)
+\method{as.list}{mfactor}(x, levels = FALSE, ...)
 
-\method{mfactor}{list}(x, labels = levels, levels, ordered = F, exclude,
+\method{mfactor}{list}(x, labels = levels, levels, ordered = FALSE, exclude,
   ...)
 }
 \arguments{
 \item{x}{a list where each entry represents a list of}
+
+\item{...}{additional arguments, depending on the value of x.}
 
 \item{labels}{\strong{Either} an optional character vector of labels for the
 levels (in the same order as 'levels' after removing those in
@@ -23,8 +25,6 @@ ordered (in the order given).}
 \item{exclude}{A vector of values to be excluded when forming the set of
 levels.  NOTE THAT unlike ordinary factors, this parameter defaults to
 \code{getOption('mfactor.none','<None>')}.}
-
-\item{...}{additional arguments, depending on the value of x.}
 }
 \description{
 Conversion between lists of values and mfactor variables.

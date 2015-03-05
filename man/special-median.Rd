@@ -6,11 +6,11 @@
 \alias{upper.median}
 \title{Special median functions.}
 \usage{
-lower.median(x)
+lower.median(x, na.rm = FALSE)
 
-upper.median(x)
+upper.median(x, na.rm = FALSE)
 
-\method{median}{random}(x)
+\method{median}{random}(x, na.rm = FALSE)
 }
 \arguments{
 \item{a}{numeric vector containing the values whose (special) median is to be computed}

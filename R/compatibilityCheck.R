@@ -1,7 +1,7 @@
 
 #' Test that two (x and y) data.frame's are compatibile for binding via \code{rbind(x,y)}.
 #'
-#' Identifies a variety of incompatibilities between two \code{data.frame} objects 
+#' Identifies x variety of incompatibilities between two \code{data.frame} objects 
 #' that could cause errors, or missing data when combined via \code{rbind(x,y)}
 #' and raises an error if combining the two data.frames would result in missing 
 #' data or other unexpected outcomes.
@@ -10,13 +10,15 @@
 #' to be run whenever rbind(x,y) is called with two \code{data.frame} objects.
 #'
 #' @param x,y \code{data.frame} objects 
+#' @param verbose If TRUE, and errors are present, the table of errors is printed to the console.
+#' @param .stop If TRUE, and errors are present, execution is stopped via `stop()`.
 #' @export
 #' @family mfactor
-compatibilityCheck <- function(a,b,verbose=TRUE,.stop=FALSE){
-	if(is.null(a)) return(invisible())
-	if(is.null(b)) return()
+compatibilityCheck <- function(x,y,verbose=TRUE,.stop=FALSE){
+	if(is.null(x)) return(invisible())
+	if(is.null(y)) return()
 
-	fields <- names(a)
+	fields <- names(x)
 	out <- data.frame(field=fields,
 					  class_a=as.character(NA),
 					  class_b=as.character(NA),
@@ -26,19 +28,19 @@ compatibilityCheck <- function(a,b,verbose=TRUE,.stop=FALSE){
 	# --------------------------------------------------
 	# indexes of factors and mfactors
 	# --------------------------------------------------
-	fx <- which(sapply(a,inherits,c('factor')))
-	fy <- which(sapply(b,inherits,c('factor')))
-	mfx <- which(sapply(a,inherits,c('mfactor')))
-	mfy <- which(sapply(b,inherits,c('mfactor')))
+	fx <- which(sapply(x,inherits,c('factor')))
+	fy <- which(sapply(y,inherits,c('factor')))
+	mfx <- which(sapply(x,inherits,c('mfactor')))
+	mfy <- which(sapply(y,inherits,c('mfactor')))
 
 	# --------------------------------------------------
 	# validate factors v. factors
 	# --------------------------------------------------
 	for(i in intersect(fx,fy)){
 		(field <- fields[i])
-		out[i,'class_a'] <- paste(class(a[,i]),collapse=';')
-		out[i,'class_b'] <- paste(class(b[,i]),collapse=';')
-		if(!identical(levels(a[,field]),levels(b[,field]))){
+		out[i,'class_a'] <- paste(class(x[,i]),collapse=';')
+		out[i,'class_b'] <- paste(class(y[,i]),collapse=';')
+		if(!identical(levels(x[,field]),levels(y[,field]))){
 			out[out$field == field,'incompatibility'] <- 
 				"Factor levels differ between data frames"
 		}
@@ -49,41 +51,41 @@ compatibilityCheck <- function(a,b,verbose=TRUE,.stop=FALSE){
 	# --------------------------------------------------
 	for(i in setdiff(fx,c(mfy,fy))){
 		(field <- fields[i])
-		out[i,'class_a'] <- paste(class(a[,i]),collapse=';')
-		out[i,'class_b'] <- paste(class(b[,i]),collapse=';')
-		if(inherits(b[,field],c('factor','mfactor'))){
+		out[i,'class_a'] <- paste(class(x[,i]),collapse=';')
+		out[i,'class_b'] <- paste(class(y[,i]),collapse=';')
+		if(inherits(y[,field],c('factor','mfactor'))){
 			stop('impossible?')
-		} else if(inherits(b[,field],'character')){
-			if(!all(b[,field] %in% levels(a[,field]))){
+		} else if(inherits(y[,field],'character')){
+			if(!all(y[,field] %in% levels(x[,field]))){
 				out[out$field == field,'incompatibility'] <- 
-					paste('inherits(b[,"',field,'"],"character") and !all(b[,"',field,'"] %in% levels(a[,"',field,'"]))',sep = '')
+					paste('inherits(y[,"',field,'"],"character") and !all(y[,"',field,'"] %in% levels(x[,"',field,'"]))',sep = '')
 		}
-		else if(inherits(b[,field],'logical')){
-			if(!all(is.na(b[,field])))
+		else if(inherits(y[,field],'logical')){
+			if(!all(is.na(y[,field])))
 				out[out$field == field,'incompatibility'] <- 
-					paste('inherits(b[,"',field,'"],"logical") and !all(is.na(b[,"',field,'"]))',sep = '')
+					paste('inherits(y[,"',field,'"],"logical") and !all(is.na(y[,"',field,'"]))',sep = '')
 		}
-		else if(!all(is.na(b[,field])))
+		else if(!all(is.na(y[,field])))
 			out[out$field == field,'incompatibility'] <- 
-				'field in dataframe "a" cannot be coerced to the mfactor in data.frame "b"'
+				'field in dataframe "x" cannot be coerced to the mfactor in data.frame "y"'
 		}
 	}
 
 	for(i in setdiff(fy,c(fx,mfx))){
 		(field <- fields[i])
-		(out[i,'class_a'] <- paste(class(a[,i]),collapse=';'))
-		(out[i,'class_b'] <- paste(class(b[,i]),collapse=';'))
-		if(inherits(a[,field],c('factor','mfactor'))){
+		(out[i,'class_a'] <- paste(class(x[,i]),collapse=';'))
+		(out[i,'class_b'] <- paste(class(y[,i]),collapse=';'))
+		if(inherits(x[,field],c('factor','mfactor'))){
 			stop('impossible?')
-		} else if(inherits(a[,field],'character')){
-			if(!all(a[,field] %in% levels(b[,field])))
+		} else if(inherits(x[,field],'character')){
+			if(!all(x[,field] %in% levels(y[,field])))
 				out[out$field == field,'incompatibility'] <- 
-					paste('!all(a[,"',field,'"] %in% levels(b[,"',field,'"]))',sep = '')
-		} else if(inherits(a[,field],'logical')){
-			if(!all(is.na(a[,field])))
+					paste('!all(x[,"',field,'"] %in% levels(y[,"',field,'"]))',sep = '')
+		} else if(inherits(x[,field],'logical')){
+			if(!all(is.na(x[,field])))
 				out[out$field == field,'incompatibility'] <- 
-					paste('inherits(a[,"',field,'"],"logical") and !all(is.na(a[,"',field,'"]))',sep = '')
-		} else if(!all(is.na(a[,field]))) {
+					paste('inherits(x[,"',field,'"],"logical") and !all(is.na(x[,"',field,'"]))',sep = '')
+		} else if(!all(is.na(x[,field]))) {
 			out[out$field == field,'incompatibility'] <- 
 				'field in dataframe "B" cannot be coerced to the mfactor in data.frame "A"'
 		}
@@ -94,10 +96,10 @@ compatibilityCheck <- function(a,b,verbose=TRUE,.stop=FALSE){
 	# --------------------------------------------------
 	for(i in intersect(mfx,mfy)){
 		(field <- fields[i])
-		out[i,'class_a'] <- paste(class(a[,i]),collapse=';')
-		out[i,'class_b'] <- paste(class(b[,i]),collapse=';')
-		levA <- levels(a[,field])
-		levB <- levels(b[,field])
+		out[i,'class_a'] <- paste(class(x[,i]),collapse=';')
+		out[i,'class_b'] <- paste(class(y[,i]),collapse=';')
+		levA <- levels(x[,field])
+		levB <- levels(y[,field])
 		if(length(levA) && length(levB) && !identical(levA,levB)){
 			out[out$field == field,'incompatibility'] <- 
 				"Factor levels differ between data frames"
@@ -109,50 +111,50 @@ compatibilityCheck <- function(a,b,verbose=TRUE,.stop=FALSE){
 	# --------------------------------------------------
 	for(i in setdiff(mfx,mfy)){
 		(field <- fields[i])
-		out[i,'class_a'] <- paste(class(a[,i]),collapse=';')
-		out[i,'class_b'] <- paste(class(b[,i]),collapse=';')
-		if(inherits(b[,field],'factor')){
-			if(length(levels(a[,field])) &&
-			   !(identical(levels(b[,field]),levels(a[,field]))|
-				 identical(levels(b[,field]),c(getOption('mfactor.none','<None>'),levels(a[,field])))))
+		out[i,'class_a'] <- paste(class(x[,i]),collapse=';')
+		out[i,'class_b'] <- paste(class(y[,i]),collapse=';')
+		if(inherits(y[,field],'factor')){
+			if(length(levels(x[,field])) &&
+			   !(identical(levels(y[,field]),levels(x[,field]))|
+				 identical(levels(y[,field]),c(getOption('mfactor.none','<None>'),levels(x[,field])))))
 				out[out$field == field,'incompatibility'] <- "Factor levels differ between data frames"
-					#paste('levels of a[,"',field,'"] do not match levels of b[,"',field,'"]',sep = '')
+					#paste('levels of x[,"',field,'"] do not match levels of y[,"',field,'"]',sep = '')
 		}
-		else if(inherits(b[,field],'character')){
-			if(length(levels(a[,field])) &&
-			   !all(b[,field] %in% levels(a[,field]))){
+		else if(inherits(y[,field],'character')){
+			if(length(levels(x[,field])) &&
+			   !all(y[,field] %in% levels(x[,field]))){
 				out[out$field == field,'incompatibility'] <- 
-					paste('inherits(b[,"',field,'"],"character") and !all(b[,"',field,'"] %in% levels(a[,"',field,'"]))',sep = '')
+					paste('inherits(y[,"',field,'"],"character") and !all(y[,"',field,'"] %in% levels(x[,"',field,'"]))',sep = '')
 		}
-		else if(inherits(b[,field],'logical')){
-			if(!all(is.na(b[,field])))
+		else if(inherits(y[,field],'logical')){
+			if(!all(is.na(y[,field])))
 				out[out$field == field,'incompatibility'] <- 
-					paste('inherits(b[,"',field,'"],"logical") and !all(is.na(b[,"',field,'"]))',sep = '')
+					paste('inherits(y[,"',field,'"],"logical") and !all(is.na(y[,"',field,'"]))',sep = '')
 		}
-		else if(!all(is.na(b[,field])))
+		else if(!all(is.na(y[,field])))
 			out[out$field == field,'incompatibility'] <- 
-				'field in dataframe "a" cannot be coerced to the mfactor in data.frame "b"'
+				'field in dataframe "x" cannot be coerced to the mfactor in data.frame "y"'
 		}
 	}
 
 	for(i in setdiff(mfy,mfx)){
 		(field <- fields[i])
-		(out[i,'class_a'] <- paste(class(a[,i]),collapse=';'))
-		(out[i,'class_b'] <- paste(class(b[,i]),collapse=';'))
-		if(inherits(a[,field],'factor')){
-			if(!(identical(levels(a[,field]),levels(b[,field]))|
-				 identical(levels(a[,field]),c(getOption('mfactor.none','<None>'),levels(b[,field])))))
+		(out[i,'class_a'] <- paste(class(x[,i]),collapse=';'))
+		(out[i,'class_b'] <- paste(class(y[,i]),collapse=';'))
+		if(inherits(x[,field],'factor')){
+			if(!(identical(levels(x[,field]),levels(y[,field]))|
+				 identical(levels(x[,field]),c(getOption('mfactor.none','<None>'),levels(y[,field])))))
 				out[out$field == field,'incompatibility'] <- "Factor levels differ between data frames"
-					#paste('levels of a[,"',field,'"] do not match levels of b[,"',field,'"]',sep = '')
-		} else if(inherits(a[,field],'character')){
-			if(!all(a[,field] %in% levels(b[,field])))
+					#paste('levels of x[,"',field,'"] do not match levels of y[,"',field,'"]',sep = '')
+		} else if(inherits(x[,field],'character')){
+			if(!all(x[,field] %in% levels(y[,field])))
 				out[out$field == field,'incompatibility'] <- 
-					paste('!all(a[,"',field,'"] %in% levels(b[,"',field,'"]))',sep = '')
-		} else if(inherits(a[,field],'logical')){
-			if(!all(is.na(a[,field])))
+					paste('!all(x[,"',field,'"] %in% levels(y[,"',field,'"]))',sep = '')
+		} else if(inherits(x[,field],'logical')){
+			if(!all(is.na(x[,field])))
 				out[out$field == field,'incompatibility'] <- 
-					paste('inherits(a[,"',field,'"],"logical") and !all(is.na(a[,"',field,'"]))',sep = '')
-		} else if(!all(is.na(a[,field]))) {
+					paste('inherits(x[,"',field,'"],"logical") and !all(is.na(x[,"',field,'"]))',sep = '')
+		} else if(!all(is.na(x[,field]))) {
 			out[out$field == field,'incompatibility'] <- 
 				'field in dataframe "B" cannot be coerced to the mfactor in data.frame "A"'
 		}

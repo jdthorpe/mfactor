@@ -1,6 +1,6 @@
 
 #' @export
-#' @family mfactor
+#' @family Coercion-to-mfactor
 #' @rdname mfactor-list
 as.list.mfactor <- function(x,levels=FALSE, ...) {
 	ARGS <- list(...)

@@ -10,9 +10,12 @@
 #' or a set of indicator variables.  (See examples)
 #'
 #' @param x An object to be coerced into a multi-factor
-#' @param ... additional arguments, depending on the value of x 
+#' @param ... Additional arguments, which affect the coersion of an x to
+#' class mfactor
+#' 
+#'
 #' @export
-#' @family mfactor
+#' @family Coercion-to-mfactor
 #' @inheritParams base::strsplit
 #' @inheritParams mfactor
 #' @examples

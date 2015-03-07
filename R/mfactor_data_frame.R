@@ -4,6 +4,7 @@
 # as.data.frame(as.matrix(mfactor))
 
 #' @export
+#' @family Coercion-to-mfactor
 #' @method mfactor data.frame
 mfactor.data.frame <- function(x,...)
 	mfactor.matrix(as.matrix(x),...)

@@ -10,7 +10,11 @@
 \method{mfactor}{matrix}(x, levels = dimnames(x)[[2]], ...)
 }
 \arguments{
-\item{x}{a matrix of mode logical, with columns to be interpreted as indicator variables}
+\item{x}{A matrix of mode logical to be coerced to a vector with class multi-factor
+or a multifactor to be coerced to matrix.}
+
+\item{...}{Additional arguments, which affect the coersion of an x to
+class mfactor}
 
 \item{levels}{a vector of levls with length equal to \code{ncol(x)}
 to be the levels of the resulting mfactor. (default = dimnames(x)[[2]])}
@@ -31,24 +35,18 @@ mfactor(x)
 as.matrix(y)
 }
 \seealso{
-Other mfactor: \code{\link{as.character.mfactor}};
-  \code{\link{as.factor.mfactor}},
+Other Coercion-from-mfactor: \code{\link{as.character.mfactor}};
+  \code{\link{as.factor.mfactor}};
   \code{\link{factor.mfactor}},
-  \code{\link{mfactor.factor}};
-  \code{\link{as.list.mfactor}},
-  \code{\link{mfactor.list}};
-  \code{\link{compatibilityCheck}};
-  \code{\link{mfactor.character}}; \code{\link{mfactor}},
-  \code{\link{mfactor.mfactor}}
+  \code{\link{mfactor.factor}},
+  \code{\link{ordered.mfactor}};
+  \code{\link{mfactor.mfactor}}; \code{\link{mfactor}}
 
-Other mfactor: \code{\link{as.character.mfactor}};
-  \code{\link{as.factor.mfactor}},
-  \code{\link{factor.mfactor}},
-  \code{\link{mfactor.factor}};
-  \code{\link{as.list.mfactor}},
-  \code{\link{mfactor.list}};
-  \code{\link{compatibilityCheck}};
-  \code{\link{mfactor.character}}; \code{\link{mfactor}},
-  \code{\link{mfactor.mfactor}}
+Other Coercion-to-mfactor: \code{\link{as.list.mfactor}},
+  \code{\link{mfactor.list}}; \code{\link{factor.mfactor}},
+  \code{\link{mfactor.factor}},
+  \code{\link{ordered.mfactor}};
+  \code{\link{mfactor.character}};
+  \code{\link{mfactor.mfactor}}; \code{\link{mfactor}}
 }
 

@@ -10,14 +10,19 @@ lower.median(x, na.rm = FALSE)
 
 upper.median(x, na.rm = FALSE)
 
-\method{median}{random}(x, na.rm = FALSE)
+median.random(x,na.rm=FALSE)
 }
 \arguments{
-\item{a}{numeric vector containing the values whose (special) median is to be computed}
+\item{x}{an object for which a method has been defined, or a numeric vector containing the values whose median is to be computed.}
+
+\item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 }
 \description{
-Special median functions, which return the upper(lower) of the two middle values
-when lenght(x) is even
+When `length(x)`, these special median functions return the upper, lower, or a random
+selection from the middle two values of x.  When `length(x)` is odd, each function
+is performes identcialy to `base::median`.
+
+A randomly selected median.
 }
 \examples{
 x = c(1,2,3,3,3,4,5,6,7,8)

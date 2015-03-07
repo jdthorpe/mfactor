@@ -30,19 +30,13 @@
 #' sorted into increasing order _of 'x'_.  Note that the value of this argument 
 #' does not have to include all possible values of x.
 #' 
-#' @param labels \strong{Either} an optional character vector of labels for the
-#' levels (in the same order as 'levels' after removing those in
-#' 'exclude'), \strong{or} a character string of length 1.
+#' @param ... Additional arguments, which affect the coersion of an x to
+#' class mfactor
 #' 
-#' @param exclude A vector of values to be excluded when forming the set of
-#' levels.  NOTE THAT unlike ordinary factors, this parameter defaults to 
-#' \code{getOption('mfactor.none','<None>')}.
-#' 
-#' @param ordered logical flag to determine if the levels should be regarded as
-#' ordered (in the order given).
-#' @param ... additional arguments, depending on the value of x.  
 #' @export
-#' @family mfactor
+#' @rdname mfactor
+#' @family Coercion-to-mfactor
+#' @family Coercion-from-mfactor
 #' @example man/mFactor-examples.r
 mfactor <- function (x, ...) 
 	UseMethod("mfactor")

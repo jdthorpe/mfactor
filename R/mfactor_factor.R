@@ -1,17 +1,18 @@
 
-#' Coersion of factors to Multi-level Factors 
-#'
-#' The function \code{mfactor} is used to create a factor like vector in which 
-#' individual entries may take zero or more values from the unique levels of x 
-#' (\code{levels(x)}). 
-#'
+# Coersion of factors to Multi-level Factors 
+#
+# The function \code{mfactor} is used to create a factor like vector in which 
+# individual entries may take zero or more values from the unique levels of x 
+# (\code{levels(x)}). 
+#
+# @param x a factor to be coerced to a multi-factor
+# @param split if specified, causes x to be coerced by \code{\link{as.character.mfactor}}
+# @param ...  additional arguments depending on wether 'split' is specified
+# @inheritParams mfactor
+
 #' @export
-#' @family mfactor
+#' @family Coercion-to-mfactor
 #' @rdname mfactor-factor
-#' @param x a factor to be coerced to a multi-factor
-#' @param split if specified, causes x to be coerced by \code{\link{as.character.mfactor}}
-#' @param ...  additional arguments depending on wether 'split' is specified
-#' @inheritParams mfactor
 mfactor.factor <- function(x,
 						   levels,
 						   labels=levels,

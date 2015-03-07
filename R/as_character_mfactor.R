@@ -3,14 +3,20 @@
 #'
 #' @export
 #' @method as.character mfactor 
-#' @family mfactor
-#' @param x a multi-factor to be coerced to a character vector
+#'
+#' @family Coercion-from-mfactor
+#'
+#' @param x A multi-factor to be coerced to a character vector
+#'
 #' @param sep A character string used to separate the distinct values that an entry may
 #' defaults to ';'
+#'
 #' @param none A character representation for an element in which none of the levels are
 #' taken.  Defaults to \code{'getOption('mfactor.none','<None>')'}.  NOTE that \code{'NONE'}
 #' is not the same as NA, the latter representing no information whereas the former indicates 
 #' the knowlege that none of levels were indicated.
+#'
+#' @param ... Additional parameters \code{...} are is not supported
 as.character.mfactor <- function (x,
 								  sep=';',
 								  none= getOption('mfactor.none','<None>') ,

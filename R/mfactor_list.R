@@ -2,9 +2,30 @@
 #' Conversion between lists of values and mfactor variables
 #' 
 #' Conversion between lists of values and mfactor variables.
-#' @param x a list where each entry represents a list of 
+#' @param x a list where each element contains zero or more objects from 
+#' a unique set of levels. 
+#' 
+#' @param levels an optional vector of the values (as character strings)
+#' that x might have taken. The default is the unique set of values taken by
+#' as.character(x), sorted into increasing order of x. Note that this set can
+#' be specified as smaller than sort(unique(x)).
+#' 
+#' @param labels \strong{Either} an optional character vector of labels for the
+#' levels (in the same order as 'levels' after removing those in
+#' 'exclude'), \strong{or} a character string of length 1.
+#' 
+#' @param exclude A vector of values to be excluded when forming the set of
+#' levels.  NOTE THAT unlike ordinary factors, this parameter defaults to 
+#' \code{getOption('mfactor.none','<None>')}.
+#' 
+#' @param ordered logical flag to determine if the levels should be regarded as
+#' ordered (in the order given).
+#' 
+#' @param ... Additional arguments, which affect the coersion of an x to
+#' class mfactor
+#' 
 #' @export
-#' @family mfactor
+#' @family Coercion-to-mfactor
 #' @inheritParams mfactor
 #' @rdname mfactor-list
 #' @examples
@@ -20,7 +41,8 @@ mfactor.list <- function(x,
 						 labels=levels,
 						 levels,
 						 ordered=FALSE,
-						 exclude,...){ # additional arguments to mfactor.factor
+						 exclude,
+						 ...){ # additional arguments to mfactor.factor
 	modes <- function(x) {
 		if(is.null(x))
 			NULL

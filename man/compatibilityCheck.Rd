@@ -4,13 +4,17 @@
 \alias{compatibilityCheck}
 \title{Test that two (x and y) data.frame's are compatibile for binding via \code{rbind(x,y)}.}
 \usage{
-compatibilityCheck(a, b, verbose = TRUE, .stop = FALSE)
+compatibilityCheck(x, y, verbose = TRUE, .stop = FALSE)
 }
 \arguments{
 \item{x,y}{\code{data.frame} objects}
+
+\item{verbose}{If TRUE, and errors are present, the table of errors is printed to the console.}
+
+\item{.stop}{If TRUE, and errors are present, execution is stopped via `stop()`.}
 }
 \description{
-Identifies a variety of incompatibilities between two \code{data.frame} objects
+Identifies x variety of incompatibilities between two \code{data.frame} objects
 that could cause errors, or missing data when combined via \code{rbind(x,y)}
 and raises an error if combining the two data.frames would result in missing
 data or other unexpected outcomes.
@@ -18,17 +22,5 @@ data or other unexpected outcomes.
 \details{
 Note that setting \code{'options(strict.Rbind=TRUE)'} will cause this compatibilty check
 to be run whenever rbind(x,y) is called with two \code{data.frame} objects.
-}
-\seealso{
-Other mfactor: \code{\link{as.character.mfactor}};
-  \code{\link{as.factor.mfactor}},
-  \code{\link{factor.mfactor}},
-  \code{\link{mfactor.factor}};
-  \code{\link{as.list.mfactor}},
-  \code{\link{mfactor.list}};
-  \code{\link{as.matrix.mfactor}},
-  \code{\link{mfactor.matrix}};
-  \code{\link{mfactor.character}}; \code{\link{mfactor}},
-  \code{\link{mfactor.mfactor}}
 }
 

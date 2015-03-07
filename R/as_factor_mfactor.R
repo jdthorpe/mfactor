@@ -1,8 +1,13 @@
 
+#' Coersion to ordinary factor vectors from multifactor vectors
+#' 
+#' Coersion to ordinary factor vectors from multifactor vectors.
+#' 
 #' @export
-#' @rdname mfactor-factor
 #' @method as.factor mfactor 
-#' @family mfactor
+#' 
+#' @family Coercion-from-mfactor
+#' 
 #' @inheritParams factor.mfactor
 #' @inheritParams as.character.mfactor
 #' 
@@ -13,9 +18,6 @@
 #' elements in the resulting factor, or (C) `NA`.  Note that only one of the
 #' arguments `sep` and `collapse` should be specified.
 #' 
-#' @param sep a string to be used as a delemiter in order to collapse
-#' muitiply valued elemnents to a string representation of those values. Note
-#' that only one of the arguments `sep` and `collapse` should be specified. 
 #' 
 as.factor.mfactor <- function(x,
 							  collapse, # argument for as.character.mfactor

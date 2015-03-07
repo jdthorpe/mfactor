@@ -8,7 +8,7 @@
   none = getOption("mfactor.none", "<None>"), ...)
 }
 \arguments{
-\item{x}{a multi-factor to be coerced to a character vector}
+\item{x}{A multi-factor to be coerced to a character vector}
 
 \item{sep}{A character string used to separate the distinct values that an entry may
 defaults to ';'}
@@ -17,20 +17,19 @@ defaults to ';'}
 taken.  Defaults to \code{'getOption('mfactor.none','<None>')'}.  NOTE that \code{'NONE'}
 is not the same as NA, the latter representing no information whereas the former indicates
 the knowlege that none of levels were indicated.}
+
+\item{...}{Additional parameters \code{...} are is not supported}
 }
 \description{
 Coersion of multi-factors to character vectors
 }
 \seealso{
-Other mfactor: \code{\link{as.factor.mfactor}},
-  \code{\link{factor.mfactor}},
-  \code{\link{mfactor.factor}};
-  \code{\link{as.list.mfactor}},
-  \code{\link{mfactor.list}};
+Other Coercion-from-mfactor: \code{\link{as.factor.mfactor}};
   \code{\link{as.matrix.mfactor}},
   \code{\link{mfactor.matrix}};
-  \code{\link{compatibilityCheck}};
-  \code{\link{mfactor.character}}; \code{\link{mfactor}},
-  \code{\link{mfactor.mfactor}}
+  \code{\link{factor.mfactor}},
+  \code{\link{mfactor.factor}},
+  \code{\link{ordered.mfactor}};
+  \code{\link{mfactor.mfactor}}; \code{\link{mfactor}}
 }
 

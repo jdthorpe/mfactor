@@ -9,7 +9,7 @@
 #' 
 #' @export
 #' @rdname mfactor-factor
-#' @family mfactor
+#' @family Coercion-from-mfactor
 #' @param x a multi-factor to be coerced to a factor
 #' @inheritParams as.character.mfactor
 factor.mfactor <- function(x, 

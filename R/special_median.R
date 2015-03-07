@@ -1,11 +1,15 @@
 
 #' Special median functions.
 #' 
-#' Special median functions, which return the upper(lower) of the two middle values
-#' when lenght(x) is even
-#' @param a numeric vector containing the values whose (special) median is to be computed
+#' When `length(x)`, these special median functions return the upper, lower, or a random 
+#' selection from the middle two values of x.  When `length(x)` is odd, each function 
+#' is performes identcialy to `base::median`. 
+#' 
 #' @export lower.median
+#' @param x	an object for which a method has been defined, or a numeric vector containing the values whose median is to be computed.
+#' @param na.rm	a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @rdname special-median
+#' @inheritParams base::median
 #' @examples
 #' x = c(1,2,3,3,3,4,5,6,7,8)
 #' 
@@ -27,6 +31,7 @@ lower.median=function(x,na.rm=FALSE) {
 
 #' @export upper.median
 #' @rdname special-median
+#' @inheritParams base::median
 upper.median=function(x,na.rm=FALSE) { 
 	if(na.rm){
 		x <- x[!is.na(x)]
@@ -36,9 +41,15 @@ upper.median=function(x,na.rm=FALSE) {
 	x[floor(length(x)/2)+1]
 }
 
+#' A randomly selected median
+#' 
+#' A randomly selected median.
+#' 
 #' @export median.random
+#' @usage median.random(x,na.rm=FALSE)
 #' @rdname special-median
-median.random=function(x,na.rm=FALSE) {
+#' @inheritParams base::median
+median.random=function(x,na.rm = FALSE) {
 	if(na.rm){
 		x <- x[!is.na(x)]
 	}

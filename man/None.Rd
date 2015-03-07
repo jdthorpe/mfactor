@@ -32,6 +32,13 @@ is.none(x) <- value
 
 \\method{is.none}{mfactor}(x) <- value
 }
+\arguments{
+\item{x}{an \R object to be tested: the default method for
+    \code{is.na} handles atomic vectors, lists and pairlists: that for
+    \code{anyNA} also handles \code{NULL}.}
+
+\item{value}{a suitable index vector for use with \code{x}.}
+}
 \description{
 The None object in the mfactor package is used to indicate
 that none of the elements are selected, which is distinct

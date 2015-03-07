@@ -3,13 +3,17 @@
 #' 
 #' Conversion between indicator matricies and mfactor variables.
 #' @export
-#' @param x a matrix of mode logical, with columns to be interpreted as indicator variables
+#' @param x A matrix of mode logical to be coerced to a vector with class multi-factor
+#' or a multifactor to be coerced to matrix. 
 #' 
 #' @param levels a vector of levls with length equal to \code{ncol(x)}
 #' to be the levels of the resulting mfactor. (default = dimnames(x)[[2]])
 #' 
+#' @param ... Additional arguments, which affect the coersion of an x to
+#' class mfactor
+#' 
 #' @rdname mfactor-matrix
-#' @family mfactor
+#' @family Coercion-to-mfactor
 #' @examples
 #' 
 #' (x = matrix(

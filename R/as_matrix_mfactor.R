@@ -1,7 +1,8 @@
 
+# description is attached to matrix.mfactor
 #' @export
 #' @rdname mfactor-matrix
-#' @family mfactor
+#' @family Coercion-from-mfactor
 as.matrix.mfactor <- function(x,...){
 	# convert to a matrix of indicator variables
 	ux <- unclass(x)

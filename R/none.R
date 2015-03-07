@@ -12,7 +12,8 @@
 #' @export
 #' @rdname None
 #' 
-NONE <- structure(0,class=c('mfactor'),
+NONE <- structure(0,
+				  class=c('mfactor'),
 				  levels=character(0),
 				  mlevels=character(0))
 
@@ -46,17 +47,20 @@ is.none.mfactor <- function(x)
 
 #' @export
 #' @rdname None
+#' @inheritParams base::is.na
 `is.none<-` <- function(x,value)
 	UseMethod("is.none<-")
 
 #' @export
 #' @rdname None
+#' @inheritParams base::is.na
 `is.none<-.default` <- function(x,value)
 	stop(paste("`is.none<-`() is not defined for variables of class '",class(x)[1],"'",sep = ''))
 
 #' @export
 #' @method is.none<- mfactor 
 #' @rdname None
+#' @inheritParams base::is.na
 `is.none<-.mfactor` <- function (x, value) {
 	oc <- class(x)
 	x <- unclass(x)

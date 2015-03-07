@@ -31,7 +31,8 @@
     marked encodings are not converted.  This is forced (with a warning)
     if any input is found which is marked as \code{"bytes"}.}
 
-\item{...}{additional arguments, depending on the value of x}
+\item{...}{Additional arguments, which affect the coersion of an x to
+class mfactor}
 }
 \description{
 The function \code{mfactor} is used to create a factor like vector in which
@@ -51,15 +52,13 @@ mfactor(x,levels=letters[1:4],split = ',')
 as.character(y,sep = ',')
 }
 \seealso{
-Other mfactor: \code{\link{as.character.mfactor}};
-  \code{\link{as.factor.mfactor}},
-  \code{\link{factor.mfactor}},
-  \code{\link{mfactor.factor}};
-  \code{\link{as.list.mfactor}},
+Other Coercion-to-mfactor: \code{\link{as.list.mfactor}},
   \code{\link{mfactor.list}};
   \code{\link{as.matrix.mfactor}},
   \code{\link{mfactor.matrix}};
-  \code{\link{compatibilityCheck}}; \code{\link{mfactor}},
-  \code{\link{mfactor.mfactor}}
+  \code{\link{factor.mfactor}},
+  \code{\link{mfactor.factor}},
+  \code{\link{ordered.mfactor}};
+  \code{\link{mfactor.mfactor}}; \code{\link{mfactor}}
 }
 

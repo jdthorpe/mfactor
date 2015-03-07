@@ -131,7 +131,10 @@ mfactor(mx)
 
 # INCLUSION IN DATA FRAMES
 (dd <- data.frame(a = LETTERS[1:6]
-			,b = mfactor(c(NA,'1','a','b','a,1','1,b'),levels = c('1','a','b','c'),split=',',ordered = TRUE)
+			,b = mfactor(c(NA,'1','a','b','a,1','1,b'),
+						 levels = c('1','a','b','c'),
+						 split=',',
+						 ordered = TRUE)
 			,c = 1:6 + 1000)
 			)
 dd$b

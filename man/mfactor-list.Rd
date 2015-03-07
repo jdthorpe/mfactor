@@ -11,9 +11,16 @@
   ...)
 }
 \arguments{
-\item{x}{a list where each entry represents a list of}
+\item{x}{a list where each element contains zero or more objects from
+a unique set of levels.}
 
-\item{...}{additional arguments, depending on the value of x.}
+\item{levels}{an optional vector of the values (as character strings)
+that x might have taken. The default is the unique set of values taken by
+as.character(x), sorted into increasing order of x. Note that this set can
+be specified as smaller than sort(unique(x)).}
+
+\item{...}{Additional arguments, which affect the coersion of an x to
+class mfactor}
 
 \item{labels}{\strong{Either} an optional character vector of labels for the
 levels (in the same order as 'levels' after removing those in
@@ -37,24 +44,20 @@ mfactor(x,levels=letters[1:4])
 as.list(y)
 }
 \seealso{
-Other mfactor: \code{\link{as.character.mfactor}};
-  \code{\link{as.factor.mfactor}},
-  \code{\link{factor.mfactor}},
-  \code{\link{mfactor.factor}};
-  \code{\link{as.matrix.mfactor}},
+Other Coercion-to-mfactor: \code{\link{as.matrix.mfactor}},
   \code{\link{mfactor.matrix}};
-  \code{\link{compatibilityCheck}};
-  \code{\link{mfactor.character}}; \code{\link{mfactor}},
-  \code{\link{mfactor.mfactor}}
+  \code{\link{factor.mfactor}},
+  \code{\link{mfactor.factor}},
+  \code{\link{ordered.mfactor}};
+  \code{\link{mfactor.character}};
+  \code{\link{mfactor.mfactor}}; \code{\link{mfactor}}
 
-Other mfactor: \code{\link{as.character.mfactor}};
-  \code{\link{as.factor.mfactor}},
-  \code{\link{factor.mfactor}},
-  \code{\link{mfactor.factor}};
-  \code{\link{as.matrix.mfactor}},
+Other Coercion-to-mfactor: \code{\link{as.matrix.mfactor}},
   \code{\link{mfactor.matrix}};
-  \code{\link{compatibilityCheck}};
-  \code{\link{mfactor.character}}; \code{\link{mfactor}},
-  \code{\link{mfactor.mfactor}}
+  \code{\link{factor.mfactor}},
+  \code{\link{mfactor.factor}},
+  \code{\link{ordered.mfactor}};
+  \code{\link{mfactor.character}};
+  \code{\link{mfactor.mfactor}}; \code{\link{mfactor}}
 }
 

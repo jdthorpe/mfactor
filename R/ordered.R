@@ -1,44 +1,45 @@
 
-# --------------------------------------------------
-# ordered() family
-# --------------------------------------------------
-
-# redefine the base::ordered as a generic.
+#' S3 generics for \code{\link[base]{factor}},
+#' \code{\link[base]{ordered}} ,
+#' \code{\link{as.factor}}, and \code{\link{as.ordered}}
+#' 
 #' @export
-ordered = function (x, ...)
+#' @rdname factor
+#' @param x	a vector of data, usually taking a small number of distinct values. 
+#' @param ... additional parameters to be passed to specific methods of \code{\link[base]{factor}},
+#' \code{\link[base]{ordered}} or appropriate methods such as 
+#' \code{\link{factor.mfactor}} and \code{\link{ordered.mfactor}}
+ordered <- function (x, ...)
     UseMethod('ordered')
 
-# set the default to the base package
 #' @export
 #' @method ordered default
 ordered.default  <- function(x, ...)
    	base::ordered(x, ...)
 
-# redirect calls to factor.mfactor
 #' @export
+#' @rdname mfactor-factor
 #' @method ordered mfactor
-ordered.mfactor = function(x, ...)
+ordered.mfactor <- function(x, ...)
 	factor.mfactor(x, ...,ordered=TRUE)
 
 # --------------------------------------------------
 # as.ordered() family
 # --------------------------------------------------
 
-# redefine the base::as.ordered as a generic.
+#' @rdname factor
 #' @export as.ordered
 as.ordered <- function (x, ...)
     UseMethod('as.ordered')
 
-# set the default to the base package
 #' @export
 #' @method as.ordered default
-as.ordered.default = function(x, ...)
+as.ordered.default <- function(x, ...)
 	base::as.ordered(x, ...)
 
 
-# redirect calls to as.factor.mfactor
 #' @export
 #' @method as.ordered mfactor
-as.ordered.mfactor = function(x, ...)
+as.ordered.mfactor <- function(x, ...)
 	as.factor.mfactor(x, ... ,ordered=TRUE)
 

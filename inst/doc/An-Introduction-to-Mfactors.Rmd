@@ -212,7 +212,7 @@ options(mfactor.none= NULL)
 options(mfactor.collapse=NULL)
 ```
 
-## The 'NONE" type
+## The `NONE` type
 
 As mentioned earlier, each element of an multi-factor can be
 thought of as the set of responses to a question indicating "Check all that

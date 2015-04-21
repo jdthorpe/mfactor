@@ -201,7 +201,7 @@ mf
 <span class="co"># the median value in the absence of ties, otherwise a random selection from </span>
 <span class="co"># the values closest to the arethmetic median.</span>
 <span class="kw">as.factor</span>(mf,median.random)
-<span class="co">#&gt; [1] &lt;NA&gt;      &lt;None&gt;    Never     Rarely    Sometimes Never     Rarely   </span>
+<span class="co">#&gt; [1] &lt;NA&gt;      &lt;None&gt;    Never     Rarely    Sometimes Rarely    Rarely   </span>
 <span class="co">#&gt; [8] Rarely   </span>
 <span class="co">#&gt; Levels: &lt;None&gt; &lt; Never &lt; Rarely &lt; Sometimes &lt; Often</span></code></pre>
 <p>User defined aggregating functions can also be used</p>
@@ -240,14 +240,14 @@ mf
 <span class="co">#&gt; 6 Levels: &lt;&lt;&lt;EMPTY&gt;&gt;&gt; &lt; Never &lt; Rarely &lt; Sometimes &lt; ... &lt; &lt;&lt;&lt;Various&gt;&gt;&gt;</span>
 <span class="kw">options</span>(<span class="dt">mfactor.collapse=</span>median.random)
 <span class="kw">as.factor</span>(mf)
-<span class="co">#&gt; [1] &lt;NA&gt;        &lt;&lt;&lt;EMPTY&gt;&gt;&gt; Never       Rarely      Sometimes   Rarely     </span>
+<span class="co">#&gt; [1] &lt;NA&gt;        &lt;&lt;&lt;EMPTY&gt;&gt;&gt; Never       Rarely      Sometimes   Never      </span>
 <span class="co">#&gt; [7] Sometimes   Rarely     </span>
 <span class="co">#&gt; Levels: &lt;&lt;&lt;EMPTY&gt;&gt;&gt; &lt; Never &lt; Rarely &lt; Sometimes &lt; Often</span></code></pre>
 <p>Note that arguments supplied to <code>as.factor()</code> will always override global options.</p>
 </div>
 </div>
 <div id="the-none-type" class="section level2">
-<h2>The ’NONE&quot; type</h2>
+<h2>The <code>NONE</code> type</h2>
 <p>As mentioned earlier, each element of an multi-factor can be thought of as the set of responses to a question indicating “Check all that apply’. In the case that none of the options apply (and there is no option for ‘None’), an element containing no values (”None of these apply to me“) is distinct from a missing value (”User was not asked this question“).</p>
 <p>There is a special <code>NONE</code> object which represents the former concept(“None of these apply to me”), which can be used to test for elements in which no response is selected:</p>
 <pre class="sourceCode r"><code class="sourceCode r">mf ==<span class="st"> </span>NONE

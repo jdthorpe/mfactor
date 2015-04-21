@@ -1,5 +1,18 @@
 
-## Installation Instructions
+## Overview
+
+The multi-factor (mfactor) package handles "Ragged Enum" data, in which each observation takes zero or more of a fixed set of values.  
+In R, such data are typically handled with one of these types  
+
+ - data.frames or lists of indicator vectors
+ - an indicator matirx
+ - a list-of-lists 
+ - delimited character vectors 
+
+The mfactor package serves as an intermediate to each of these types and includes S3 methods for `table()`, `as.factor()`, and `as.ordered()` 
+for summarizing ragged enums and/or coercing to ordinary factors.
+
+## Getting Started
 
 1. Install the release version of `devtools` from CRAN with `install.packages("devtools")`.
 
@@ -27,4 +40,12 @@
         # Remove the package after installation
         unlink("mfactor.zip")
         ```
+
+3. View the introduction vignette via:
+
+	```R
+	library(mfactor)
+	vignette("An-Introduction-to-Mfactors")
+	```
+	or browse the HTML version of the vignette [here](http://htmlpreview.github.io/?https://github.com/jdthorpe/mfactor/blob/master/inst/doc/An-Introduction-to-Mfactors.html)
 

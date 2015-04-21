@@ -47,11 +47,11 @@ for summarizing ragged enums and/or coercing them to ordinary factors.
 	library(mfactor)
 	vignette("An-Introduction-to-Mfactors")
 	```
-	or browse the HTML version of the vignette (*sans* it's CSS resources) [here](http://htmlpreview.github.io/?https://github.com/jdthorpe/mfactor/blob/master/inst/doc/An-Introduction-to-Mfactors.html).
+	or browse the HTML version of the vignette [here](http://htmlpreview.github.io/?https://github.com/jdthorpe/mfactor/blob/master/inst/doc/An-Introduction-to-Mfactors.html).
 
 ## Notes
 
-`mfactor`s are currently implemented with a `factor` like backend, which 
+`mfactor`'s are currently implemented with a `factor` like backend, which 
 was fast enough for the project that motivated them.  I have a branch 
 with a indicator matrix backend which is faster, especially when more 
 than a few elements take on multiple values.

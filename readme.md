@@ -47,5 +47,5 @@ for summarizing ragged enums and/or coercing them to ordinary factors.
 	library(mfactor)
 	vignette("An-Introduction-to-Mfactors")
 	```
-	or browse the HTML version of the vignette [here](http://htmlpreview.github.io/?https://github.com/jdthorpe/mfactor/blob/master/inst/doc/An-Introduction-to-Mfactors.html).
+	or browse the HTML version of the vignette (*sans* it's CSS resources) [here](http://htmlpreview.github.io/?https://github.com/jdthorpe/mfactor/blob/master/inst/doc/An-Introduction-to-Mfactors.html).
 

@@ -4,13 +4,13 @@
 The multi-factor (mfactor) package handles "Ragged Enum" data, in which each observation takes zero or more of a fixed set of values.  
 In R, such data are typically handled with one of these types  
 
- - data.frames or lists of indicator vectors
+ - `data.frame`s or `list`s of indicator vectors
  - an indicator matirx
- - a list-of-lists 
+ - lists-of-lists 
  - delimited character vectors 
 
 The mfactor package serves as an intermediate to each of these types and includes S3 methods for `table()`, `as.factor()`, and `as.ordered()` 
-for summarizing ragged enums and/or coercing to ordinary factors.
+for summarizing ragged enums and/or coercing them to ordinary factors.
 
 ## Getting Started
 
@@ -47,5 +47,5 @@ for summarizing ragged enums and/or coercing to ordinary factors.
 	library(mfactor)
 	vignette("An-Introduction-to-Mfactors")
 	```
-	or browse the HTML version of the vignette [here](http://htmlpreview.github.io/?https://github.com/jdthorpe/mfactor/blob/master/inst/doc/An-Introduction-to-Mfactors.html)
+	or browse the HTML version of the vignette [here](http://htmlpreview.github.io/?https://github.com/jdthorpe/mfactor/blob/master/inst/doc/An-Introduction-to-Mfactors.html).
 

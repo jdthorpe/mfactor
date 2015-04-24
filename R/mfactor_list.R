@@ -54,10 +54,12 @@ mfactor.list <- function(x,
 	if(length(unique(unlist(lapply(x,modes)))) > 1) stop('all elements must have the same mode')
 	y <- unique(unlist(x))
 	if(!length(y)) {
-		out <- mfactor.factor(factor(),...)
+		out <- mfactor.factor(factor(NA),...)
 		length(out) <- length(x)
 		if(!missing(labels))
 			levels(out) <- labels
+		else if(!missing(levels))
+			levels(out) <- levels
 		out[] <- NONE
 		return(out)
 	}

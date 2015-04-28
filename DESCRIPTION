@@ -44,6 +44,7 @@ Collate:
     'summary_mfactor.R'
     'unique_mfactor.R'
     'unusedArgs.R'
+    'write_table.R'
 Suggests:
     knitr
 VignetteBuilder: knitr
